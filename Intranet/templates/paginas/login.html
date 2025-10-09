@@ -5,7 +5,8 @@
             <h1 class="text-2xl font-bold text-gray-900">Intranet Login</h1>
             <p class="text-gray-600 mt-2">Accede a tu cuenta corporativa</p>
         </div>
-        <form class="space-y-4">
+        <form action="loggi" method="post" class="space-y-4">
+            {% csrf_token %}
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Usuario o Email</label>
                 <input type="text" id="username" name="username" required
