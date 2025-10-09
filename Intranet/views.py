@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
+from django.contrib.auth.models import User
 from django.contrib import messages
 
 
@@ -24,3 +25,10 @@ def loggi(request):
 
 def admi(request):
     return render(request, "paginas/administrador.html")
+
+def usuario(request):
+    usuarios = User.objects.all()
+    contexto = {
+        'usuarios':usuarios
+    }
+    return render(request, "paginas/usuario.html",contexto)
