@@ -1,0 +1,37 @@
+ {% extends "bases/login.html" %}
+    {% block content %}
+ <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div class="text-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Intranet Login</h1>
+            <p class="text-gray-600 mt-2">Accede a tu cuenta corporativa</p>
+        </div>
+        <form class="space-y-4">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Usuario o Email</label>
+                <input type="text" id="username" name="username" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Ingresa tu usuario o email">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+                <input type="password" id="password" name="password" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                       placeholder="Ingresa tu contraseña">
+            </div>
+            <div class="flex items-center justify-between">
+                <label class="flex items-center">
+                    <input type="checkbox" class="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                    <span class="ml-2 text-sm text-gray-600">Recordar sesión</span>
+                </label>
+                <a href="#" class="text-sm text-blue-600 hover:underline">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button type="submit"
+                    class="w-full bg-blue-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Iniciar Sesión
+            </button>
+        </form>
+        <p class="text-center text-sm text-gray-600 mt-4">
+            ¿Nuevo usuario? <a href="#" class="text-blue-600 hover:underline">Regístrate aquí</a>
+        </p>
+    </div>
+    {% endblock %}
