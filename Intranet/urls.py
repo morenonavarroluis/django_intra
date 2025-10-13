@@ -5,5 +5,7 @@ urlpatterns = [
     path('', inicio , name="inicio"),
     path('loggi', loggi, name='loggi'),
     path('admi', admi , name="admi"),
-    path('usuario', usuario, name="usuario")
+    path('usuario', usuario, name="usuario"),
+    path('add_noticia', add_noticia, name="add_noticia"),
+    path('soporte', soporte, name="soporte")
 ]

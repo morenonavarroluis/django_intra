@@ -32,3 +32,9 @@ def usuario(request):
         'usuarios':usuarios
     }
     return render(request, "paginas/usuario.html",contexto)
+
+def add_noticia(request):
+    return render(request, "paginas/noticia.html")
+
+def soporte(request):
+    return render(request, "paginas/soporte.html")

@@ -1,0 +1,250 @@
+/* ================================== */
+/* == ESTILOS BASE Y VARIABLES CSS == */
+/* ================================== */
+:root {
+    --primary-color: #007bff; /* Color para activo */
+    --bg-color: #f9f9f9;
+    --text-color: #111;
+    --menu-width-open: 240px;
+    --menu-width-closed: 72px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* ================================== */
+/* == ESTRUCTURA PRINCIPAL (GRID) === */
+/* ================================== */
+.dashboard-layout {
+    display: grid;
+    /* Define las áreas del grid: cabecera (header) y contenido principal (main) */
+    grid-template-rows: 56px 1fr; 
+    grid-template-columns: var(--menu-width-open) 1fr;
+    height: 100vh;
+    transition: grid-template-columns 0.3s ease;
+}
+
+/* Estado del menú cerrado */
+.dashboard-layout.collapsed {
+    grid-template-columns: var(--menu-width-closed) 1fr;
+}
+
+/* ================================== */
+/* =========== CABECERA ============= */
+/* ================================== */
+.header {
+    grid-column: 1 / -1; /* Ocupa todas las columnas */
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 10;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    margin-right: 20px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* ================================== */
+/* =========== MENÚ LATERAL ========= */
+/* ================================== */
+.sidebar {
+    grid-row: 2 / 3;
+    grid-column: 1 / 2;
+    background-color: #fff;
+    padding-top: 10px;
+    overflow-y: auto;
+    border-right: 1px solid #ddd;
+    position: relative; /* Para el posicionamiento del submenú en modo colapsado */
+}
+
+/* Base de los items de navegación y submenús */
+.nav-item {
+    display: block; /* Para que ocupe todo el ancho */
+    text-decoration: none;
+    color: var(--text-color);
+    transition: background-color 0.15s;
+    margin: 4px 10px; /* Margen para los items principales */
+    border-radius: 5px;
+    overflow: hidden; /* Oculta el contenido extra en modo colapsado */
+}
+
+/* Estilo del contenido principal del item (icono + texto) */
+.nav-item > .nav-content, .main-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.nav-item:hover > .nav-content, 
+.nav-item:hover > .main-item,
+.main-item:hover {
+    background-color: #eee;
+}
+
+.nav-item i {
+    font-size: 20px;
+    width: 30px; 
+    text-align: center;
+    flex-shrink: 0; /* Evita que el icono se encoja */
+}
+
+.nav-item span {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 1;
+    transition: opacity 0.3s ease, width 0.3s ease;
+    margin-left: 10px; 
+}
+
+/* Item activo (fondo azul claro) */
+.nav-item.active > .nav-content,
+.has-submenu.open > .main-item {
+    background-color: #e0f0ff; 
+    color: var(--primary-color); 
+    font-weight: bold;
+}
+
+/* ITEMS CON SUBMENÚ */
+.has-submenu {
+    position: relative;
+    user-select: none;
+}
+
+.arrow {
+    margin-left: auto;
+    margin-right: 0 !important; 
+    transition: transform 0.3s;
+}
+
+/* Estilo del submenú */
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden; 
+    max-height: 0; /* Inicialmente oculto */
+    transition: max-height 0.3s ease-in-out;
+    background-color: #ffffff;
+}
+
+/* Submenú abierto */
+.has-submenu.open > .submenu {
+    max-height: 200px; /* Altura suficiente para mostrar los ítems */
+    border-top: 1px solid #e9e9e9;
+}
+
+.submenu li a {
+    display: block;
+    padding: 7px 15px 7px 55px; /* Indentación para sub-items */
+    text-decoration: none;
+    color: #666; 
+    font-size: 14px;
+    position: relative;
+}
+
+.submenu li a::before {
+    content: '\2022'; /* Punto pequeño */
+    color: #ccc; /* Color gris claro para el punto */
+    position: absolute;
+    left: 40px;
+}
+
+.submenu li a:hover {
+    background-color: #f7f7f7;
+    color: #000;
+}
+
+.has-submenu.open .arrow {
+    transform: rotate(180deg);
+}
+
+
+/* ================================== */
+/* ======== ESTADO COLAPSADO ======== */
+/* ================================== */
+
+.dashboard-layout.collapsed .nav-item {
+    margin: 4px auto; /* Centra el item */
+    width: 50px; /* Ancho fijo para el icono */
+    padding: 0;
+    text-align: center;
+}
+
+.dashboard-layout.collapsed .nav-item > .nav-content,
+.dashboard-layout.collapsed .nav-item > .main-item {
+    justify-content: center;
+    padding: 10px;
+}
+
+.dashboard-layout.collapsed .nav-item span {
+    display: none; /* Oculta completamente el texto */
+}
+
+.dashboard-layout.collapsed .arrow {
+    display: none; /* Oculta la flecha en modo colapsado */
+}
+
+.dashboard-layout.collapsed .submenu {
+    /* En modo colapsado, el submenú debe estar oculto */
+    display: none; 
+}
+
+/* ================================== */
+/* ======== CONTENIDO PRINCIPAL ===== */
+/* ================================== */
+.main-content {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* Títulos del contenido */
+.content-section h2 {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Diseño de tarjetas (ejemplo de contenido) */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}

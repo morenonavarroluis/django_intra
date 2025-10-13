@@ -1,0 +1,83 @@
+{% extends 'bases/dashboard.html' %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 flex items-center justify-center p-2">
+    <div class="bg-white shadow-xl rounded-2xl w-full max-w-lg p-8 space-y-6 border border-gray-200">
+
+        <h2 class="text-3xl font-extrabold text-center text-blue-800 tracking-tight">
+            📰 Cargar Nueva Noticia
+        </h2>
+
+        <hr class="border-gray-200" />
+
+        <form class="space-y-6">
+
+            <div>
+                <label for="titulo" class="block text-sm font-semibold text-gray-700 mb-2">Título de la Noticia</label>
+                <input type="text" id="titulo" name="titulo" placeholder="Escribe el título de tu noticia aquí..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition duration-150 ease-in-out placeholder-gray-400 text-gray-800"
+                    required>
+            </div>
+
+            <div>
+                <label for="contenido" class="block text-sm font-semibold text-gray-700 mb-2">Contenido</label>
+                <textarea id="contenido" name="contenido" rows="6"
+                    placeholder="Redacta el cuerpo completo de tu noticia..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition duration-150 ease-in-out placeholder-gray-400 text-gray-800 resize-y"
+                    required>
+        </textarea>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-semibold text-gray-700">Subir Imagen</label>
+                <div class="flex items-center space-x-4">
+
+                    <label
+                        class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition duration-200 ease-in-out">
+                        <span>Seleccionar archivo</span>
+                        <input type="file" id="imagen" name="imagen" class="hidden">
+                    </label>
+
+                    <span id="file-name" class="text-gray-500 text-sm truncate">
+                        No se ha seleccionado ningún archivo.
+                    </span>
+                </div>
+
+                <script>
+                    document.getElementById('imagen').addEventListener('change', function (event) {
+                        const fileName = event.target.files.length > 0 ? event.target.files[0].name : 'No se ha seleccionado ningún archivo.';
+                        document.getElementById('file-name').textContent = fileName;
+                    });
+                </script>
+            </div>
+
+            <div>
+                <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition duration-300 ease-in-out transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-blue-300 shadow-lg">
+                    Cargar noticia ✨
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    tinymce.init({
+        // 1. Apunta al ID de tu textarea
+        selector: '#contenido', 
+        
+        // 2. Define las herramientas visibles (la "barra de herramientas")
+        plugins: 'advlist autolink lists link image charmap print preview anchor',
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image',
+        
+        // 3. Opcional: Altura
+        height: 300,
+        
+        // 4. Opcional: Integración de Tailwind para estilos de contenido
+        content_css: [
+            // Carga aquí tu CSS principal de Tailwind
+            'https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css' 
+        ]
+    });
+</script>
+{% endblock content %}

@@ -5,225 +5,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Estilo YouTube</title>
-    <style>
-        /* ================================== */
-        /* == ESTILOS BASE Y VARIABLES CSS == */
-        /* ================================== */
-        :root {
-            --primary-color: #2600ff; /* Rojo de YouTube */
-            --secondary-color: #333;
-            --bg-color: #f9f9f9;
-            --text-color: #111;
-            --menu-width-open: 240px;
-            --menu-width-closed: 72px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-
-        /* ================================== */
-        /* == ESTRUCTURA PRINCIPAL (GRID) === */
-        /* ================================== */
-        .dashboard-layout {
-            display: grid;
-            /* Define las áreas del grid: cabecera (header) y contenido principal (main) */
-            grid-template-rows: 56px 1fr; 
-            grid-template-columns: var(--menu-width-open) 1fr;
-            height: 100vh;
-            transition: grid-template-columns 0.3s ease;
-        }
-
-        /* Estado del menú cerrado */
-        .dashboard-layout.collapsed {
-            grid-template-columns: var(--menu-width-closed) 1fr;
-        }
-
-        /* ================================== */
-        /* =========== CABECERA ============= */
-        /* ================================== */
-        .header {
-            grid-column: 1 / -1; /* Ocupa todas las columnas */
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            z-index: 10;
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            margin-right: 20px;
-            padding: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        /* ================================== */
-        /* =========== MENÚ LATERAL ========= */
-        /* ================================== */
-        .sidebar {
-            grid-row: 2 / 3;
-            grid-column: 1 / 2;
-            background-color: #fff;
-            padding-top: 10px;
-            overflow-y: auto;
-            border-right: 1px solid #ddd;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            margin: 4px 0;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: background-color 0.15s;
-        }
-
-        .nav-item:hover {
-            background-color: #eee;
-        }
-
-        .nav-item i {
-            font-size: 20px;
-            width: 30px; /* Asegura espacio fijo para el icono */
-            text-align: center;
-        }
-
-        .nav-item span {
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-            margin-left: 20px; /* Espacio entre icono y texto */
-        }
-
-        /* Estado de colapso del menú */
-        .dashboard-layout.collapsed .nav-item {
-            justify-content: center;
-            padding: 10px; /* Padding más pequeño cuando colapsa */
-        }
-
-        .dashboard-layout.collapsed .nav-item span {
-            opacity: 0;
-            width: 0;
-            margin-left: 0;
-            position: absolute; /* Oculta el texto sin afectar el icono */
-        }
-
-        /* ================================== */
-        /* ======== CONTENIDO PRINCIPAL ===== */
-        /* ================================== */
-        .main-content {
-            grid-row: 2 / 3;
-            grid-column: 2 / 3;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        /* Títulos del contenido */
-        .content-section h2 {
-            margin-bottom: 15px;
-            border-bottom: 2px solid #ddd;
-            padding-bottom: 5px;
-        }
-
-        /* Diseño de tarjetas (ejemplo de contenido) */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .card {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-        }
-    </style>
+    <title>Intranet</title>
+     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="https://cdn.tiny.cloud/1/ejfjtrkl8wvp1zp0gmdayshiu4vttmo0aa48mpk83p6bw6dw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
 
     <div class="dashboard-layout">
         
-        <header class="header">
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i> 
-            </button>
-            <div class="logo">MiDashboard</div>
-            </header>
+        <header class="bg-white shadow-md p-4 flex items-center justify-between sticky top-0 z-10 border-b border-gray-200">
+    
+    <div class="flex items-center space-x-4">
+        <button id="menuToggle" 
+                class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-lg transition duration-150">
+            <i class="fas fa-bars text-xl"></i> 
+        </button>
+        <div class="text-2xl font-bold text-gray-800 tracking-wide">
+            P.A.C.E.
+        </div>
+    </div>
+    
+    <div class="profile flex items-center">
+        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500 shadow-lg cursor-pointer hover:opacity-90 transition">
+            <img src="{% static 'img/i.jpg' %}" 
+                 alt="Foto de Perfil"
+                 class="w-full h-full object-cover">
+        </div>
+    </div>
+</header>
 
-        <aside class="sidebar" id="sidebar">
+       <aside class="sidebar" id="sidebar">
             <a href="{% url 'admi' %}" class="nav-item active">
-                <i class="fas fa-home"></i>
-                <span>Inicio</span>
+                <div class="nav-content">
+                    <i class="fas fa-th-large"></i> <span>Inicio</span>
+                </div>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-fire"></i>
-                <span>Tendencias</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-history"></i>
-                <span>Historial</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-video"></i>
-                <span>Mis Videos</span>
-            </a>
-            <hr style="margin: 10px 0; border: 0; border-top: 1px solid #ddd;">
-            <a href="#" class="nav-item">
-                <i class="fas fa-music"></i>
-                <span>Música</span>
-            </a>
-            <a href="#" class="nav-item">
-                <i class="fas fa-gamepad"></i>
-                <span>Juegos</span>
+
+            <div class="nav-item has-submenu">
+                <div class="main-item">
+                    <i class="fas fa-file-alt"></i> <span>Solicitud</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li><a href="#">Crear Solicitud soporte</a></li>
+                    <li><a href="#">Constancia de trabajo</a></li>
+                    <li><a href="#">Recibo de pago</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-item has-submenu open">
+                <div class="main-item">
+                    <i class="fas fa-clipboard-list"></i> <span>Descargas</span>
+                    <i class="fas fa-chevron-up arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li><a href="#">Planilla de Vacaciones</a></li>
+                    <li><a href="#">Planilla de Permisos</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-item has-submenu">
+                <div class="main-item">
+                    <i class="fas fa-book"></i> <span>Biblioteca Digital</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li><a href="#">Manuales</a></li>
+                    <li><a href="#">Políticas</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-item has-submenu">
+                <div class="main-item">
+                    <i class="fas fa-chart-bar"></i> <span>Web</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li><a href="#">Analíticas</a></li>
+                </ul>
+            </div>
+            <a href="{% url 'soporte' %}" class="nav-item">
+                <div class="nav-content">
+                    <i class="fas fa-question-circle"></i> <span>Casos de Soporte</span>
+                </div>
             </a>
             <a href="{% url 'usuario' %}" class="nav-item">
-                <i class="fas fa-newspaper"></i>
-                <span>Gestion</span>
+                <div class="nav-content">
+                    <i class="fas fa-users"></i> <span>Gestion de Usuarios</span>
+                </div>
+            </a>
+            <a href="{% url 'add_noticia' %}" class="nav-item">
+                <div class="nav-content">
+                    <i class="fas fa-newspaper"></i> <span>Cargar Noticias</span>
+                </div>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="nav-content">
+                    <i class="fas fa-sign-out-alt"></i> <span>Cerrar</span>
+                </div>
             </a>
         </aside>
 
-       {% block content %}
-       {% endblock content %}
+        <main class="main-content">
+           {% block content %}
+              
+           {% endblock content %}
+        </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const menuToggle = document.getElementById('menuToggle');
             const dashboardLayout = document.querySelector('.dashboard-layout');
+            const submenuContainers = document.querySelectorAll('.has-submenu');
 
-            // El menú por defecto está abierto. La primera pulsación lo colapsa.
+            // 1. Lógica para Colapsar/Expandir la Barra Lateral
             menuToggle.addEventListener('click', () => {
-                // Alterna la clase 'collapsed' en el layout principal
                 dashboardLayout.classList.toggle('collapsed');
+            });
+
+            // 2. Lógica para Abrir/Cerrar Submenús
+            submenuContainers.forEach(container => {
+                const mainItem = container.querySelector('.main-item');
+
+                mainItem.addEventListener('click', () => {
+                    // Evita el despliegue si el menú está colapsado (solo íconos visibles)
+                    if (dashboardLayout.classList.contains('collapsed')) {
+                        return;
+                    }
+
+                    const isOpening = !container.classList.contains('open');
+
+                    // Cierra los otros submenús (comportamiento "accordion")
+                    submenuContainers.forEach(otherContainer => {
+                        if (otherContainer !== container) {
+                            otherContainer.classList.remove('open');
+                            const otherArrow = otherContainer.querySelector('.arrow');
+                            if (otherArrow) {
+                                otherArrow.classList.remove('fa-chevron-up');
+                                otherArrow.classList.add('fa-chevron-down');
+                            }
+                        }
+                    });
+
+                    // Abre o cierra el submenú actual
+                    container.classList.toggle('open');
+                    
+                    // Cambia el icono de flecha
+                    const arrow = container.querySelector('.arrow');
+                    if (isOpening) {
+                        arrow.classList.remove('fa-chevron-down');
+                        arrow.classList.add('fa-chevron-up');
+                    } else {
+                        arrow.classList.remove('fa-chevron-up');
+                        arrow.classList.add('fa-chevron-down');
+                    }
+                });
             });
         });
     </script>
