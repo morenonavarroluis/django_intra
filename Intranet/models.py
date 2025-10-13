@@ -55,7 +55,7 @@ class Report(models.Model):
     
     ID_REPORT = models.AutoField(primary_key=True) 
     TITLE = models.CharField(max_length=100, verbose_name="Título del Reporte")
-    
+    descripcion=models.CharField(max_length=100, verbose_name="asunto del Reporte")
     # Usuario que levanta el ticket.
     reporter_user = models.ForeignKey(
         User,  

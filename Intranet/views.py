@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
@@ -59,5 +60,43 @@ def add_noticia(request):
             return redirect('add_noticia') 
     return render(request, "paginas/noticia.html")
 
+def solicitud_soport(request):
+    consulta = Area.objects.all()
+    contexto = {
+        'consulta': consulta
+    }
+    
+    if request.method == 'POST':
+        
+        are = request.POST.get('area')
+        asunto = request.POST.get('asunto')
+        descrip = request.POST.get('descripcion')
+        status = request.POST.get('status', '3')
+        level = request.POST.get('level', '3')
+        
+        area_id_entero = int(are) 
+        if request.user.is_authenticated:
+            reportero = request.user
+        else:
+            return HttpResponseForbidden("Debes iniciar sesión para enviar un reporte.")
+
+
+        
+        new_report = Report.objects.create(
+            TITLE = asunto,
+            descripcion = descrip,
+            area_id = area_id_entero ,
+            reporter_user = reportero,
+            STATUS_id = status,
+            ID_LEVEL_id = level
+        )
+        
+       
+        print(new_report)
+    
+    return render(request, "paginas/solicitud_soport.html", contexto)
+
 def soporte(request):
-    return render(request, "paginas/soporte.html")
+    casos = Report.objects.all()
+    
+    return render(request, "paginas/soporte.html",{'casos': casos})

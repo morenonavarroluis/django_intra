@@ -17,11 +17,11 @@
         
         <header class="bg-white shadow-md p-4 flex items-center justify-between sticky top-0 z-10 border-b border-gray-200">
     
-    <div class="flex items-center space-x-4">
-        <button id="menuToggle" 
-                class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-lg transition duration-150">
-            <i class="fas fa-bars text-xl"></i> 
-        </button>
+        <div class="flex items-center space-x-4">
+            <button id="menuToggle" 
+                    class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-lg transition duration-150">
+                <i class="fas fa-bars text-xl"></i> 
+            </button>
         <div class="text-2xl font-bold text-gray-800 tracking-wide">
             P.A.C.E.
         </div>
@@ -49,7 +49,7 @@
                     <i class="fas fa-chevron-down arrow"></i>
                 </div>
                 <ul class="submenu">
-                    <li><a href="#">Crear Solicitud soporte</a></li>
+                    <li><a href="{% url 'solicitud_soport' %}">Crear Solicitud soporte</a></li>
                     <li><a href="#">Constancia de trabajo</a></li>
                     <li><a href="#">Recibo de pago</a></li>
                 </ul>

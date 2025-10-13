@@ -77,22 +77,22 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          
+          {% for caso in casos %}
           <tr class="hover:bg-blue-50 transition duration-100">
             <td class="px-6 py-4 max-w-xs truncate text-sm font-medium text-gray-900" title="sin internet en mi pc">
-              sin internet en mi pc
+             {{ caso.descripcion }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Luis manuel Navarro Moreno</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-10-09</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ caso.reporter_user.get_full_name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ caso.CREATION_DATE }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Luis manuel</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                En Espera
+                {{ caso.STATUS.STATUS }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                Normal
+                {{ caso.ID_LEVEL.LEVEL }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
@@ -101,31 +101,7 @@
               </button>
             </td>
           </tr>
-          
-          <tr class="hover:bg-blue-50 transition duration-100">
-            <td class="px-6 py-4 max-w-xs truncate text-sm font-medium text-gray-900" title="MNADUELL">
-              MNADUELL
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Luis manuel Navarro Moreno</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-10-13</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Luis manuel</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                En Espera
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                Normal
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-              <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-4 rounded-lg shadow-md transition duration-150">
-                Asignar
-              </button>
-            </td>
-          </tr>
-          
+          {% endfor %}
         </tbody>
       </table>
     </div>

@@ -1,0 +1,64 @@
+{% extends 'bases/dashboard.html' %}
+
+{% block content %}
+
+<main class="flex-1 p-4 md:p-8 bg-gray-50 min-h-screen">
+
+    <div class="mb-8 max-w-3xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-900 border-b-2 border-indigo-600 pb-2">
+            Solicitud de Soporte
+        </h1>
+        <p class="text-gray-600 mt-2">
+            Completa el siguiente formulario para crear una nueva solicitud de soporte o reportar un problema.
+        </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl border border-gray-100">
+
+        <form action="solicitud_soport" method="post" class="space-y-6" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div>
+                <label for="tipo" class="block text-sm font-medium text-gray-700 mb-1">
+                    Tipo de Solicitud:
+                </label>
+                <select name="area" id="tipo" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out bg-white">
+                   
+                    <option value="" disabled selected>Selecciona una opción</option>
+                    {% for a in consulta %}
+                    <option value="{{ a.ID_AREA }}">{{a.AREA}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label for="asunto" class="block text-sm font-medium text-gray-700 mb-1">
+                    Asunto:
+                </label>
+                <input type="text" id="asunto" name="asunto" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out"
+                    placeholder="Ej: Error al iniciar sesión, Pregunta sobre el módulo X">
+            </div>
+
+            <div>
+                <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">
+                    Descripción Detallada:
+                </label>
+                <textarea id="descripcion" name="descripcion" rows="6" required
+                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out resize-y"
+                    placeholder="Sé lo más específico posible. Incluye pasos para reproducir el error o mensajes exactos."></textarea>
+            </div>
+
+            <div class="pt-4">
+                <button type="submit"
+                    class="w-full inline-flex justify-center py-3 px-4 border border-transparent shadow-lg text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150 ease-in-out cursor-pointer transform hover:scale-105">
+                    <i class="fas fa-paper-plane mr-2"></i> Enviar Solicitud
+                </button>
+            </div>
+        </form>
+
+    </div>
+</main>
+
+{% endblock content %}
