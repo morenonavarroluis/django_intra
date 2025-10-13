@@ -3,101 +3,62 @@
 {% block content %}
 
 <main class="flex-1 p-6">
-    <!-- Featured News Section -->
     <section class="mb-8">
         <h2 class="text-2xl font-bold text-gray-900 mb-4">Noticias Destacadas</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Featured Card 1 -->
+            
+            {% for noticia in noticias %}
+            
             <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="https://via.placeholder.com/400x250?text=Noticia+1" alt="Noticia Destacada 1"
+                
+                <img src="{{ noticia.imagen.url }}" alt="{{ noticia.nombre }}"
                     class="w-full h-48 object-cover">
+                
                 <div class="p-6">
                     <span
-                        class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded mb-2">Internacional</span>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Título de Noticia Destacada Principal</h3>
-                    <p class="text-gray-600 mb-4">Resumen breve de la noticia que capta la atención del lector con
-                        detalles clave.</p>
+                        class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded mb-2">General</span> 
+                    
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ noticia.nombre }}</h3>
+                    
+                    <p class="text-gray-600 mb-4">{{ noticia.comentario|truncatechars:100 }}</p>
+                    
                     <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">Hace 2 horas</span>
+                        <span class="text-sm text-gray-500">
+                            {% if noticia.fecha_creacion %}{{ noticia.fecha_creacion|date:"D, d M Y" }}{% else %}Sin fecha{% endif %}
+                        </span>
+                        
                         <i class="fas fa-bookmark text-gray-400 hover:text-blue-600 cursor-pointer"></i>
                     </div>
                 </div>
             </div>
+            
+            {% endfor %}
 
-            <!-- Featured Card 2 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="https://via.placeholder.com/400x250?text=Noticia+2" alt="Noticia Destacada 2"
-                    class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <span
-                        class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded mb-2">Economía</span>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Análisis Económico Actual</h3>
-                    <p class="text-gray-600 mb-4">Breve descripción de los impactos en el mercado global.</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">Hace 1 hora</span>
-                        <i class="fas fa-share text-gray-400 hover:text-blue-600 cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Featured Card 3 -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="https://via.placeholder.com/400x250?text=Noticia+3" alt="Noticia Destacada 3"
-                    class="w-full h-48 object-cover">
-                <div class="p-6">
-                    <span
-                        class="inline-block bg-red-100 text-red-800 text-xs font-semibold px-2 py-1 rounded mb-2">Salud</span>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Avances en Investigación Médica</h3>
-                    <p class="text-gray-600 mb-4">Descubre los últimos descubrimientos que podrían cambiar el futuro.
-                    </p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">Hace 30 min</span>
-                        <i class="fas fa-heart text-gray-400 hover:text-red-600 cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Recent News Section -->
     <section>
         <h2 class="text-2xl font-bold text-gray-900 mb-4">Noticias Recientes</h2>
         <div class="space-y-4">
-            <!-- Recent News Item 1 -->
-            <article class="bg-white p-6 rounded-lg shadow-md flex items-center hover:shadow-lg transition-shadow">
-                <img src="https://via.placeholder.com/100x80?text=Reciente+1" alt="Noticia Reciente 1"
+            {% for noticia in noticias|slice:":2" %}  <article class="bg-white p-6 rounded-lg shadow-md flex items-center hover:shadow-lg transition-shadow">
+                <img src="{{ noticia.imagen.url }}" alt="{{ noticia.nombre }}"
                     class="w-24 h-20 object-cover rounded mr-4">
                 <div class="flex-1">
                     <span
-                        class="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded mb-1">Entretenimiento</span>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Evento Cultural Importante</h3>
-                    <p class="text-gray-600 text-sm">Resumen corto de la noticia reciente...</p>
+                        class="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded mb-1">Local</span>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ noticia.nombre }}</h3>
+                    <p class="text-gray-600 text-sm">{{ noticia.comentario|truncatechars:50 }}</p>
                     <div class="flex items-center justify-between mt-2">
-                        <span class="text-sm text-gray-500">Hace 10 min</span>
+                        <span class="text-sm text-gray-500">
+                             {% if noticia.fecha_creacion %}{{ noticia.fecha_creacion|timesince }} ago{% else %}Recién subido{% endif %}
+                        </span>
                         <button class="text-blue-600 hover:text-blue-800 text-sm">Leer más</button>
                     </div>
                 </div>
             </article>
-
-            <!-- Recent News Item 2 -->
-            <article class="bg-white p-6 rounded-lg shadow-md flex items-center hover:shadow-lg transition-shadow">
-                <img src="https://via.placeholder.com/100x80?text=Reciente+2" alt="Noticia Reciente 2"
-                    class="w-24 h-20 object-cover rounded mr-4">
-                <div class="flex-1">
-                    <span
-                        class="inline-block bg-yellow-100 text-yellow-800 text-xs font-semibold px-2 py-1 rounded mb-1">Local</span>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Actualización Local</h3>
-                    <p class="text-gray-600 text-sm">Detalles sobre eventos en la comunidad.</p>
-                    <div class="flex items-center justify-between mt-2">
-                        <span class="text-sm text-gray-500">Hace 5 min</span>
-                        <button class="text-blue-600 hover:text-blue-800 text-sm">Leer más</button>
-                    </div>
-                </div>
-            </article>
+            {% endfor %}
         </div>
     </section>
 </main>
-
-
 
 {% endblock content %}

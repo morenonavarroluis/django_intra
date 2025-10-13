@@ -48,8 +48,7 @@ class Level(models.Model):
         return self.LEVEL
 
 
-# -------------------------------------------------------------
-## 2. Modelos Principales (Report e Imagenes)
+
 
 class Report(models.Model):
     """Corresponde a la tabla 'intranet report' (Casos/Tickets de Soporte)."""
@@ -106,7 +105,7 @@ class Report(models.Model):
 
     class Meta:
         verbose_name = "Reporte de Soporte"
-        # ✅ CORREGIDO
+       
         verbose_name_plural = "Reportes de Soporte" 
         # Ordenar por fecha de creación descendente para ver los más nuevos primero
         ordering = ['-CREATION_DATE']
@@ -116,19 +115,11 @@ class Report(models.Model):
 
 
 class Imagenes(models.Model):
-    """Corresponde a la tabla 'intranet imagenes' (Archivos multimedia adjuntos)."""
+
     cod_imagen = models.AutoField(primary_key=True)
     
-    # La imagen debe estar asociada a un reporte
-    reporte = models.ForeignKey(
-        Report,
-        on_delete=models.CASCADE,
-        related_name='imagenes',
-        verbose_name="Reporte Asociado"
-    )
-
     imagen = models.FileField(
-        upload_to='reportes/imagenes/', 
+        upload_to='noticias/', 
         max_length=1000, 
         verbose_name="Archivo Adjunto"
     )
