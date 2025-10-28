@@ -9,19 +9,6 @@
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Configuración de Tailwind para usar un color primario personalizado
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'pace-primary': '#1D4ED8', // Azul más corporativo (blue-700)
-                        'pace-light': '#3B82F6',   // Azul claro (blue-500)
-                    },
-                }
-            }
-        }
-    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -37,25 +24,25 @@
                       shadow-xl lg:shadow-none lg:w-16 lg:hover:w-64 lg:group-[.is-open]:w-64">
                <a href="{% url 'admi' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
                 <div class="flex items-center space-x-3">
-                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <i class="fa-solid fa-house"></i>
                     <span class="nav-text">Inicio</span>
                 </div>
             </a>
             <a href="{% url 'usuario' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
                 <div class="flex items-center space-x-3">
-                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <i class="fa-solid fa-users"></i> 
                     <span class="nav-text">Usuarios</span>
                 </div>
             </a>
             <a href="{% url 'add_noticia' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
                 <div class="flex items-center space-x-3">
-                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <i class="fa-solid fa-newspaper"></i>
                     <span class="nav-text">Agregar Noticias</span>
                 </div>
             </a>
             <a href="{% url 'soporte' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
                 <div class="flex items-center space-x-3">
-                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <i class="fa-solid fa-headset"></i>
                     <span class="nav-text">soporte</span>
                 </div>
             </a>
@@ -70,7 +57,7 @@
                 
             </nav>
            
-            <a href="#" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
+            <a href="{% url 'cerrar_sesion' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
                 <div class="flex items-center space-x-3">
                     <i class="fas fa-sign-out-alt text-lg"></i> 
                     <span class="nav-text">Cerrar Sesión</span>

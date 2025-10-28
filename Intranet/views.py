@@ -1,6 +1,6 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import render,redirect
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import *
@@ -100,3 +100,9 @@ def soporte(request):
     casos = Report.objects.all()
     
     return render(request, "paginas/soporte.html",{'casos': casos})
+
+
+def exit(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('loggi')
