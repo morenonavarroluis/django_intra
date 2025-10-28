@@ -5,134 +5,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intranet</title>
-     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>P.A.C.E. - Intranet</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Configuración de Tailwind para usar un color primario personalizado
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'pace-primary': '#1D4ED8', // Azul más corporativo (blue-700)
+                        'pace-light': '#3B82F6',   // Azul claro (blue-500)
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <script src="https://cdn.tiny.cloud/1/ejfjtrkl8wvp1zp0gmdayshiu4vttmo0aa48mpk83p6bw6dw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
-<body>
+<body class="bg-gray-50">
 
-    <div class="dashboard-layout">
+    <div class="dashboard-layout flex h-screen overflow-hidden" id="dashboardLayout">
         
-        <header class="bg-white shadow-md p-4 flex items-center justify-between sticky top-0 z-10 border-b border-gray-200">
-    
-        <div class="flex items-center space-x-4">
-            <button id="menuToggle" 
-                    class="lg:hidden text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-lg transition duration-150">
-                <i class="fas fa-bars text-xl"></i> 
-            </button>
-        <div class="text-2xl font-bold text-gray-800 tracking-wide">
-            P.A.C.E.
-        </div>
-    </div>
-    
-    <div class="profile flex items-center">
-        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-500 shadow-lg cursor-pointer hover:opacity-90 transition">
-            <img src="{% static 'img/i.jpg' %}" 
-                 alt="Foto de Perfil"
-                 class="w-full h-full object-cover">
-        </div>
-    </div>
-</header>
-
-       <aside class="sidebar" id="sidebar">
-            <a href="{% url 'admi' %}" class="nav-item active">
-                <div class="nav-content">
-                    <i class="fas fa-th-large"></i> <span>Inicio</span>
+        <aside class="sidebar fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 
+                      lg:sticky lg:flex-shrink-0 w-64 bg-white border-r border-gray-200 
+                      p-4 flex flex-col space-y-2 z-30 transition-all duration-300 ease-in-out 
+                      shadow-xl lg:shadow-none lg:w-16 lg:hover:w-64 lg:group-[.is-open]:w-64">
+               <a href="{% url 'admi' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <span class="nav-text">Inicio</span>
                 </div>
             </a>
-
-            <div class="nav-item has-submenu">
-                <div class="main-item">
-                    <i class="fas fa-file-alt"></i> <span>Solicitud</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <ul class="submenu">
-                    <li><a href="{% url 'solicitud_soport' %}">Crear Solicitud soporte</a></li>
-                    <li><a href="#">Constancia de trabajo</a></li>
-                    <li><a href="#">Recibo de pago</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-item has-submenu open">
-                <div class="main-item">
-                    <i class="fas fa-clipboard-list"></i> <span>Descargas</span>
-                    <i class="fas fa-chevron-up arrow"></i>
-                </div>
-                <ul class="submenu">
-                    <li><a href="#">Planilla de Vacaciones</a></li>
-                    <li><a href="#">Planilla de Permisos</a></li>
-                </ul>
-            </div>
-            
-            <div class="nav-item has-submenu">
-                <div class="main-item">
-                    <i class="fas fa-book"></i> <span>Biblioteca Digital</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <ul class="submenu">
-                    <li><a href="#">Manuales</a></li>
-                    <li><a href="#">Políticas</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-item has-submenu">
-                <div class="main-item">
-                    <i class="fas fa-chart-bar"></i> <span>Web</span>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <ul class="submenu">
-                    <li><a href="#">Analíticas</a></li>
-                </ul>
-            </div>
-            <a href="{% url 'soporte' %}" class="nav-item">
-                <div class="nav-content">
-                    <i class="fas fa-question-circle"></i> <span>Casos de Soporte</span>
+            <a href="{% url 'usuario' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <span class="nav-text">Usuarios</span>
                 </div>
             </a>
-            <a href="{% url 'usuario' %}" class="nav-item">
-                <div class="nav-content">
-                    <i class="fas fa-users"></i> <span>Gestion de Usuarios</span>
+            <a href="{% url 'add_noticia' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <span class="nav-text">Agregar Noticias</span>
                 </div>
             </a>
-            <a href="{% url 'add_noticia' %}" class="nav-item">
-                <div class="nav-content">
-                    <i class="fas fa-newspaper"></i> <span>Cargar Noticias</span>
+            <a href="{% url 'soporte' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <span class="nav-text">soporte</span>
                 </div>
             </a>
-            <a href="#" class="nav-item">
-                <div class="nav-content">
-                    <i class="fas fa-sign-out-alt"></i> <span>Cerrar</span>
+           
+           <div class="text-2xl font-extrabold text-pace-primary pt-1 pb-4 border-b border-gray-100 
+                        truncate lg:opacity-0 lg:group-hover:opacity-100 lg:group-[.is-open]:opacity-100 
+                        transition-opacity duration-300">
+                P.A.C.E.
+            </div>
+
+            <nav class="flex-1 space-y-1 overflow-y-auto">
+                
+            </nav>
+           
+            <a href="#" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-sign-out-alt text-lg"></i> 
+                    <span class="nav-text">Cerrar Sesión</span>
                 </div>
             </a>
         </aside>
 
-        <main class="main-content">
-           {% block content %}
-              
-           {% endblock content %}
-        </main>
+        <div class="flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
+            
+            <header class="bg-white shadow-md sticky top-0 z-20 border-b border-gray-100">
+                <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+                    
+                    <div class="flex items-center space-x-4">
+                        <button id="menuToggle" 
+                                class="text-gray-600 hover:text-pace-primary focus:outline-none 
+                                       focus:ring-2 focus:ring-pace-light p-2 rounded-full transition 
+                                       duration-150">
+                            <i class="fas fa-bars text-xl"></i> 
+                        </button>
+                    </div>
+                
+                    <div class="profile flex items-center space-x-4">
+                        <span class="text-sm font-medium text-gray-700 hidden sm:block">
+                            Hola, **[Nombre Usuario]**
+                        </span>
+                        <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-pace-primary shadow-lg 
+                                    cursor-pointer hover:ring-2 hover:ring-pace-light transition">
+                            <img src="{% static 'img/i.jpg' %}" 
+                                 alt="Foto de Perfil"
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="main-content flex-1 p-4 sm:p-6 lg:p-8">
+               {% block content %}
+                  {% endblock content %}
+            </main>
+            
+            <footer class="p-4 bg-white border-t border-gray-100 text-center text-sm text-gray-500">
+                © 2025 P.A.C.E. | Intranet
+            </footer>
+        </div>
+        
+        <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none 
+                                        lg:hidden z-20 transition-opacity duration-300"></div>
     </div>
 
+    <style>
+        .nav-item-base {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            color: #4B5563; /* gray-600 */
+            transition: all 0.2s ease-in-out;
+            white-space: nowrap; /* Evita que el texto se rompa */
+            text-decoration: none;
+        }
+
+        .nav-item-base:hover, .nav-item-base.active {
+            background-color: #EFF6FF; /* blue-50 */
+            color: #1D4ED8; /* pace-primary */
+        }
+
+        .nav-item-base.active {
+            font-weight: 600;
+        }
+
+        .nav-item-base i {
+            width: 1.5rem; /* Ancho fijo para el ícono */
+            text-align: center;
+            margin-right: 0.75rem; /* Espacio entre ícono y texto */
+        }
+        
+        /* Ocultar texto del nav-item-base en estado colapsado (desktop) */
+        .sidebar:not(:hover) .nav-text,
+        .sidebar:not(:hover) .submenu,
+        .sidebar:not(:hover) .main-item .arrow,
+        .sidebar:not(:hover) .main-item span {
+            /* Solo se oculta el texto si NO está en móvil y el sidebar NO está en hover/open */
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            overflow: hidden;
+            margin-left: -0.75rem; /* Mueve el texto hacia la izquierda para colapsar */
+        }
+
+        /* Sobrescribir el estilo de colapsado para la versión móvil */
+        @media (max-width: 1023px) {
+            .sidebar:not(.lg\:group-hover\:w-64) .nav-text,
+            .sidebar:not(.lg\:group-hover\:w-64) .submenu,
+            .sidebar:not(.lg\:group-hover\:w-64) .main-item .arrow,
+            .sidebar:not(.lg\:group-hover\:w-64) .main-item span {
+                /* Asegura que el texto esté visible cuando se abre en móvil */
+                opacity: 1;
+                width: auto;
+                margin-left: 0;
+            }
+        }
+
+
+        /* Estilos específicos para el submenu */
+        .submenu {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            list-style: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+
+        .has-submenu.open .submenu {
+            max-height: 500px; /* Un valor grande para permitir el despliegue */
+        }
+
+        .submenu a {
+            display: block;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border-radius: 0.25rem;
+            color: #6B7280; /* gray-500 */
+            transition: background-color 0.2s;
+        }
+
+        .submenu a:hover {
+            background-color: #F3F4F6; /* gray-100 */
+            color: #1D4ED8;
+        }
+        
+        /* Manejo de la barra lateral en móvil */
+        .dashboard-layout.is-open #sidebar {
+            transform: translateX(0);
+        }
+
+        .dashboard-layout.is-open #sidebarOverlay {
+            opacity: 0.5;
+            pointer-events: auto;
+        }
+    </style>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const dashboardLayout = document.getElementById('dashboardLayout');
+            const sidebar = document.querySelector('.sidebar');
             const menuToggle = document.getElementById('menuToggle');
-            const dashboardLayout = document.querySelector('.dashboard-layout');
+            const sidebarOverlay = document.getElementById('sidebarOverlay');
             const submenuContainers = document.querySelectorAll('.has-submenu');
 
             // 1. Lógica para Colapsar/Expandir la Barra Lateral
             menuToggle.addEventListener('click', () => {
-                dashboardLayout.classList.toggle('collapsed');
+                // Alternar el estado en el layout principal
+                dashboardLayout.classList.toggle('is-open'); 
+                
+                // Si el menú se abre en móvil, bloquear el scroll del cuerpo
+                if (window.innerWidth < 1024 && dashboardLayout.classList.contains('is-open')) {
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    document.body.style.overflow = '';
+                }
             });
 
-            // 2. Lógica para Abrir/Cerrar Submenús
+            // Cerrar el sidebar al hacer clic en el overlay (solo en móvil)
+            sidebarOverlay.addEventListener('click', () => {
+                dashboardLayout.classList.remove('is-open');
+                document.body.style.overflow = '';
+            });
+
+            // 2. Lógica para Abrir/Cerrar Submenús (Comportamiento "Accordion")
             submenuContainers.forEach(container => {
                 const mainItem = container.querySelector('.main-item');
+                const arrow = container.querySelector('.arrow');
 
-                mainItem.addEventListener('click', () => {
-                    // Evita el despliegue si el menú está colapsado (solo íconos visibles)
-                    if (dashboardLayout.classList.contains('collapsed')) {
+                // Asegura que el estado inicial de la flecha refleje la clase 'open'
+                if (container.classList.contains('open')) {
+                     arrow.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                }
+
+                mainItem.addEventListener('click', (e) => {
+                    // Prevenir despliegue de submenú si el texto está oculto (barra lateral colapsada en desktop)
+                    // La comprobación 'lg:w-16' es un indicativo del estado colapsado
+                    if (window.innerWidth >= 1024 && !dashboardLayout.classList.contains('is-open') && !sidebar.matches(':hover')) {
+                        // Aquí, el usuario está en desktop y el menú está en modo icono,
+                        // por lo que el clic debería ignorar el despliegue del submenú.
                         return;
                     }
 
@@ -140,12 +262,11 @@
 
                     // Cierra los otros submenús (comportamiento "accordion")
                     submenuContainers.forEach(otherContainer => {
-                        if (otherContainer !== container) {
+                        if (otherContainer !== container && otherContainer.classList.contains('open')) {
                             otherContainer.classList.remove('open');
                             const otherArrow = otherContainer.querySelector('.arrow');
                             if (otherArrow) {
-                                otherArrow.classList.remove('fa-chevron-up');
-                                otherArrow.classList.add('fa-chevron-down');
+                                otherArrow.classList.replace('fa-chevron-up', 'fa-chevron-down');
                             }
                         }
                     });
@@ -154,15 +275,21 @@
                     container.classList.toggle('open');
                     
                     // Cambia el icono de flecha
-                    const arrow = container.querySelector('.arrow');
                     if (isOpening) {
-                        arrow.classList.remove('fa-chevron-down');
-                        arrow.classList.add('fa-chevron-up');
+                        arrow.classList.replace('fa-chevron-down', 'fa-chevron-up');
                     } else {
-                        arrow.classList.remove('fa-chevron-up');
-                        arrow.classList.add('fa-chevron-down');
+                        arrow.classList.replace('fa-chevron-up', 'fa-chevron-down');
                     }
                 });
+            });
+            
+            // 3. Manejar el redimensionamiento de la ventana
+            window.addEventListener('resize', () => {
+                // Al volver a desktop, elimina el estilo de overflow y la clase 'is-open' si existe, para asegurar el layout
+                if (window.innerWidth >= 1024) {
+                    document.body.style.overflow = '';
+                    dashboardLayout.classList.remove('is-open');
+                }
             });
         });
     </script>
