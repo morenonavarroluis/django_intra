@@ -41,23 +41,25 @@ def usuario(request):
 
 def add_noticia(request):
     if request.method == 'POST':
-        title = request.POST.get('titulo')
-     
-        content = request.POST.get('contenido')
     
+        title = request.POST.get('titulo')
+        content = request.POST.get('contenido')
         img = request.FILES.get('imagen')
+        
         try:
-            new_noticia = Imagenes.objects.create(
-             nombre=title,
-             comentario=content,
-             imagen=img
-             )
-            new_noticia.save()
-            messages.success("Se registro la noticias con exito")
-            return redirect('admi')
+            new_noticia = Imagenes.objects.create( 
+                nombre=title,
+                comentario=content,
+                imagen=img
+            )
+            
+            new_noticia.save() 
+            messages.success(request, "Se registró la noticia con éxito.") 
+            return redirect('admi')   
         except Exception as e:
-            messages.error(request, "Error al cargar la Noticia")
+            messages.error(request, f"Error al cargar la Noticia: {e}") 
             return redirect('add_noticia') 
+        
     return render(request, "paginas/noticia.html")
 
 def solicitud_soport(request):
@@ -79,20 +81,21 @@ def solicitud_soport(request):
             reportero = request.user
         else:
             return HttpResponseForbidden("Debes iniciar sesión para enviar un reporte.")
-
-
-        
-        new_report = Report.objects.create(
-            TITLE = asunto,
-            descripcion = descrip,
-            area_id = area_id_entero ,
-            reporter_user = reportero,
-            STATUS_id = status,
-            ID_LEVEL_id = level
-        )
-        
-       
-        print(new_report)
+        try:
+            new_report = Report.objects.create(
+                TITLE = asunto,
+                descripcion = descrip,
+                area_id = area_id_entero ,
+                reporter_user = reportero,
+                STATUS_id = status,
+                ID_LEVEL_id = level
+            )
+            new_report.save()
+            messages.success(request, "Su solicitud de soporte ha sido enviada con éxito.")
+            return redirect('solicitud_soport')
+        except Exception as e:
+            messages.error(request, f"Error al enviar la solicitud de soporte: {e}")
+            return redirect('solicitud_soport')
     
     return render(request, "paginas/solicitud_soport.html", contexto)
 
