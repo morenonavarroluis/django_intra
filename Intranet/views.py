@@ -1,7 +1,7 @@
 from django.http import HttpResponseForbidden
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group,Permission
 from django.contrib import messages
 from .models import *
 
@@ -33,9 +33,13 @@ def admi(request):
     return render(request, "paginas/administrador.html",contexto)
 
 def usuario(request):
+    permiso = Permission.objects.all()
     usuarios = User.objects.all()
+    grupos = Group.objects.all()
     contexto = {
-        'usuarios':usuarios
+        'usuarios':usuarios,
+        'permiso': permiso,
+        'grupos': grupos
     }
     return render(request, "paginas/usuario.html",contexto)
 
@@ -104,6 +108,57 @@ def soporte(request):
     
     return render(request, "paginas/soporte.html",{'casos': casos})
 
+def registrar_usuarios(request):
+    if request.method == 'POST':
+        first_name = request.POST.get('nombre')
+        last_name = request.POST.get('apellido')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        try:
+            
+            new = User.objects.create_user(
+                username=username,
+                password=password,
+                first_name=first_name,
+                last_name=last_name,
+                email=email
+            )
+            new.save()
+            print(new)
+            messages.success(request, "Usuario registrado con éxito.")
+            return redirect('usuario')
+        except Exception as e:
+            messages.error(request, f"Error al registrar el usuario: {e}")
+            return redirect('usuario')
+    else:
+        messages.error(request, "Método no permitido para registrar usuario.")
+        return redirect('usuario')
+
+def registrar_rol(request):
+        if request.method == 'POST':
+            grupo_nombre = request.POST.get('grupo')
+            permisos_ids = request.POST.getlist('permisos')
+            
+            try:
+                nuevo_grupo = Group.objects.create(name=grupo_nombre)
+                
+                for perm_id in permisos_ids:
+                    permiso = Permission.objects.get(id=perm_id)
+                    nuevo_grupo.permissions.add(permiso)
+                
+                nuevo_grupo.save()
+                messages.success(request, "Rol registrado con éxito.")
+                return redirect('usuario')
+            except Exception as e:
+                messages.error(request, f"Error al registrar el rol: {e}")
+                return redirect('usuario')
+        else:
+            messages.error(request, "Método no permitido para registrar rol.")
+            return redirect('usuario')
+    
+        
 
 def exit(request):
     if request.user.is_authenticated:

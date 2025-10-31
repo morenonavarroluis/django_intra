@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P.A.C.E. - Intranet</title>
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-    
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
     <script src="https://cdn.tiny.cloud/1/ejfjtrkl8wvp1zp0gmdayshiu4vttmo0aa48mpk83p6bw6dw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body class="bg-gray-50">
@@ -124,179 +124,9 @@
         <div id="sidebarOverlay" class="fixed inset-0 bg-black opacity-0 pointer-events-none 
                                         lg:hidden z-20 transition-opacity duration-300"></div>
     </div>
-
-    <style>
-        .nav-item-base {
-            display: flex;
-            align-items: center;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            color: #4B5563; /* gray-600 */
-            transition: all 0.2s ease-in-out;
-            white-space: nowrap; /* Evita que el texto se rompa */
-            text-decoration: none;
-        }
-
-        .nav-item-base:hover, .nav-item-base.active {
-            background-color: #EFF6FF; /* blue-50 */
-            color: #1D4ED8; /* pace-primary */
-        }
-
-        .nav-item-base.active {
-            font-weight: 600;
-        }
-
-        .nav-item-base i {
-            width: 1.5rem; /* Ancho fijo para el ícono */
-            text-align: center;
-            margin-right: 0.75rem; /* Espacio entre ícono y texto */
-        }
-        
-        /* Ocultar texto del nav-item-base en estado colapsado (desktop) */
-        .sidebar:not(:hover) .nav-text,
-        .sidebar:not(:hover) .submenu,
-        .sidebar:not(:hover) .main-item .arrow,
-        .sidebar:not(:hover) .main-item span {
-            /* Solo se oculta el texto si NO está en móvil y el sidebar NO está en hover/open */
-            opacity: 0;
-            pointer-events: none;
-            width: 0;
-            overflow: hidden;
-            margin-left: -0.75rem; /* Mueve el texto hacia la izquierda para colapsar */
-        }
-
-        /* Sobrescribir el estilo de colapsado para la versión móvil */
-        @media (max-width: 1023px) {
-            .sidebar:not(.lg\:group-hover\:w-64) .nav-text,
-            .sidebar:not(.lg\:group-hover\:w-64) .submenu,
-            .sidebar:not(.lg\:group-hover\:w-64) .main-item .arrow,
-            .sidebar:not(.lg\:group-hover\:w-64) .main-item span {
-                /* Asegura que el texto esté visible cuando se abre en móvil */
-                opacity: 1;
-                width: auto;
-                margin-left: 0;
-            }
-        }
-
-
-        /* Estilos específicos para el submenu */
-        .submenu {
-            padding-left: 1.5rem;
-            margin-top: 0.5rem;
-            list-style: none;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-in-out;
-        }
-
-        .has-submenu.open .submenu {
-            max-height: 500px; /* Un valor grande para permitir el despliegue */
-        }
-
-        .submenu a {
-            display: block;
-            padding: 0.5rem 1rem 0.5rem 2.5rem;
-            border-radius: 0.25rem;
-            color: #6B7280; /* gray-500 */
-            transition: background-color 0.2s;
-        }
-
-        .submenu a:hover {
-            background-color: #F3F4F6; /* gray-100 */
-            color: #1D4ED8;
-        }
-        
-        /* Manejo de la barra lateral en móvil */
-        .dashboard-layout.is-open #sidebar {
-            transform: translateX(0);
-        }
-
-        .dashboard-layout.is-open #sidebarOverlay {
-            opacity: 0.5;
-            pointer-events: auto;
-        }
-    </style>
+    <script src="{% static 'js/sidebar.js' %}"></script>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dashboardLayout = document.getElementById('dashboardLayout');
-            const sidebar = document.querySelector('.sidebar');
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebarOverlay = document.getElementById('sidebarOverlay');
-            const submenuContainers = document.querySelectorAll('.has-submenu');
 
-            // 1. Lógica para Colapsar/Expandir la Barra Lateral
-            menuToggle.addEventListener('click', () => {
-                // Alternar el estado en el layout principal
-                dashboardLayout.classList.toggle('is-open'); 
-                
-                // Si el menú se abre en móvil, bloquear el scroll del cuerpo
-                if (window.innerWidth < 1024 && dashboardLayout.classList.contains('is-open')) {
-                    document.body.style.overflow = 'hidden';
-                } else {
-                    document.body.style.overflow = '';
-                }
-            });
-
-            // Cerrar el sidebar al hacer clic en el overlay (solo en móvil)
-            sidebarOverlay.addEventListener('click', () => {
-                dashboardLayout.classList.remove('is-open');
-                document.body.style.overflow = '';
-            });
-
-            // 2. Lógica para Abrir/Cerrar Submenús (Comportamiento "Accordion")
-            submenuContainers.forEach(container => {
-                const mainItem = container.querySelector('.main-item');
-                const arrow = container.querySelector('.arrow');
-
-                // Asegura que el estado inicial de la flecha refleje la clase 'open'
-                if (container.classList.contains('open')) {
-                     arrow.classList.replace('fa-chevron-down', 'fa-chevron-up');
-                }
-
-                mainItem.addEventListener('click', (e) => {
-                    // Prevenir despliegue de submenú si el texto está oculto (barra lateral colapsada en desktop)
-                    // La comprobación 'lg:w-16' es un indicativo del estado colapsado
-                    if (window.innerWidth >= 1024 && !dashboardLayout.classList.contains('is-open') && !sidebar.matches(':hover')) {
-                        // Aquí, el usuario está en desktop y el menú está en modo icono,
-                        // por lo que el clic debería ignorar el despliegue del submenú.
-                        return;
-                    }
-
-                    const isOpening = !container.classList.contains('open');
-
-                    // Cierra los otros submenús (comportamiento "accordion")
-                    submenuContainers.forEach(otherContainer => {
-                        if (otherContainer !== container && otherContainer.classList.contains('open')) {
-                            otherContainer.classList.remove('open');
-                            const otherArrow = otherContainer.querySelector('.arrow');
-                            if (otherArrow) {
-                                otherArrow.classList.replace('fa-chevron-up', 'fa-chevron-down');
-                            }
-                        }
-                    });
-
-                    // Abre o cierra el submenú actual
-                    container.classList.toggle('open');
-                    
-                    // Cambia el icono de flecha
-                    if (isOpening) {
-                        arrow.classList.replace('fa-chevron-down', 'fa-chevron-up');
-                    } else {
-                        arrow.classList.replace('fa-chevron-up', 'fa-chevron-down');
-                    }
-                });
-            });
-            
-            // 3. Manejar el redimensionamiento de la ventana
-            window.addEventListener('resize', () => {
-                // Al volver a desktop, elimina el estilo de overflow y la clase 'is-open' si existe, para asegurar el layout
-                if (window.innerWidth >= 1024) {
-                    document.body.style.overflow = '';
-                    dashboardLayout.classList.remove('is-open');
-                }
-            });
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

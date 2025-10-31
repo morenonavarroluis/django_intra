@@ -1,0 +1,168 @@
+/* Estilos básicos del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 20px;
+}
+.container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Estilos de los botones (similares a Bootstrap) */
+.btn {
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden; 
+    z-index: 1050; 
+    
+   
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
+}
+
+.modal-dialog {
+    position: relative;
+    max-width: 700px;
+    margin: 1.75rem auto;
+    transition: transform 0.3s ease-out;
+    transform: translate(0, -50px); /* Posición inicial fuera de pantalla */
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0); /* Posición final */
+}
+
+.modal-content {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: .3rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.modal-body {
+    padding: 1rem 0;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+}
+
+.close {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    margin-left: .5rem;
+}
+
+
+
+
+/* Estilos básicos para el menú principal */
+.dropdown-menu ul {
+  list-style: none; /* Quita las viñetas */
+  padding: 0;
+  margin: 0;
+ 
+  
+}
+
+/* .dropdown-menu li {
+  position: relative; 
+}
+*/
+
+.dropdown-menu a {
+  display: block;
+  padding: 15px 20px;
+  color: white;
+  text-decoration: none;
+}
+
+
+
+/* --- Estilos para el Menú Desplegable (Dropdown) --- */
+
+/* 1. Ocultar el contenido del dropdown por defecto */
+.dropdown-content {
+  display: none;
+  position: absolute; /* Permite que se superponga al resto del contenido */
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1; /* Asegura que esté por encima de otros elementos */
+}
+
+.dropdown-content li {
+  float: none; /* Asegura que los elementos del submenú estén en columna */
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* 2. Mostrar el contenido cuando se hace hover sobre el elemento padre */
+.dropdown:hover .dropdown-content {
+  display: block; /* Muestra el submenú */
+}
