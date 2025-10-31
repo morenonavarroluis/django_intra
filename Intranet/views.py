@@ -115,6 +115,7 @@ def registrar_usuarios(request):
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password')
+        grupo_id = request.POST.get('grupo')
         
         try:
             
@@ -125,8 +126,9 @@ def registrar_usuarios(request):
                 last_name=last_name,
                 email=email
             )
+            grupo = Group.objects.get(id=grupo_id)
+            new.groups.add(grupo)
             new.save()
-            print(new)
             messages.success(request, "Usuario registrado con éxito.")
             return redirect('usuario')
         except Exception as e:
@@ -157,9 +159,7 @@ def registrar_rol(request):
         else:
             messages.error(request, "Método no permitido para registrar rol.")
             return redirect('usuario')
-    
-        
-
+       
 def exit(request):
     if request.user.is_authenticated:
         logout(request)
