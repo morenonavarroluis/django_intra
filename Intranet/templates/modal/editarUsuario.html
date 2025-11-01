@@ -1,0 +1,54 @@
+<div class="modal fade" id="editarUsuario{{ user.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-white dark:bg-gray-800 dark:border dark:border-gray-700">
+      <div class="modal-header border-b border-gray-200 dark:border-gray-700">
+        <h1 class="modal-title fs-5 text-gray-900 dark:text-white" id="exampleModalLabel">Editar Usuario</h1>
+        <button type="button" class="btn-close text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white" data-bs-dismiss="modal" aria-label="Close">x</button>
+      </div>
+      <div class="modal-body max-h-96 overflow-y-auto bg-white dark:bg-gray-800">
+        <form action="{% url 'editar_usuario' user.id %}" method="post">
+          {% csrf_token %}
+          
+          <div class="mb-4">
+            <label for="username" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300">Nombre de usuario:</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" 
+                   class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline 
+                          text-gray-700 dark:text-white dark:bg-gray-700 dark:border-gray-600">
+          </div>
+          
+          <div class="mb-4">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300">Correo electrónico:</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" 
+                   class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline 
+                          text-gray-700 dark:text-white dark:bg-gray-700 dark:border-gray-600">
+          </div>
+          
+          <div class="mb-4">
+            <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300">Nombre:</label>
+            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" 
+                   class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline 
+                          text-gray-700 dark:text-white dark:bg-gray-700 dark:border-gray-600">
+          </div>
+          
+          <div class="mb-4">
+            <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300">Apellido:</label>
+            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" 
+                   class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline 
+                          text-gray-700 dark:text-white dark:bg-gray-700 dark:border-gray-600">
+          </div>
+          
+          <div class="mb-4">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-2 dark:text-gray-300">Contraseña:</label>
+            <input type="password" id="password" name="password"  
+                   class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline 
+                          text-gray-700 dark:text-white dark:bg-gray-700 dark:border-gray-600">
+          </div>
+          
+          <div class="flex items-center justify-end pt-4 border-t border-gray-200 dark:border-gray-700">
+            <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Guardar Cambios</button>
+          </div>
+        </form>
+    </div>
+  </div>
+</div>

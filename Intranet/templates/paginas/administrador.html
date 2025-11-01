@@ -4,7 +4,7 @@
 
 <main class="flex-1 p-6">
     <section class="mb-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Noticias Destacadas</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 dark:text-white">Noticias Destacadas</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             {% for noticia in noticias %}
@@ -14,16 +14,16 @@
                 <img src="{{ noticia.imagen.url }}" alt="{{ noticia.nombre }}"
                     class="w-full h-48 object-cover">
                 
-                <div class="p-6">
+                <div class="p-6 bg-white dark:bg-gray-800">
                     <span
                         class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-1 rounded mb-2">General</span> 
                     
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ noticia.nombre }}</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 dark:text-white">{{ noticia.nombre }}</h3>
                     
-                    <p class="text-gray-600 mb-4">{{ noticia.comentario|truncatechars:100 }}</p>
+                    <p class="text-gray-600 mb-4 dark:text-white">{{ noticia.comentario|truncatechars:100 }}</p>
                     
                     <div class="flex items-center justify-between">
-                        <span class="text-sm text-gray-500">
+                        <span class="text-sm text-gray-500 dark:text-white">
                             {% if noticia.fecha_creacion %}{{ noticia.fecha_creacion|date:"D, d M Y" }}{% else %}Sin fecha{% endif %}
                         </span>
                         
@@ -38,18 +38,19 @@
     </section>
 
     <section>
-        <h2 class="text-2xl font-bold text-gray-900 mb-4">Noticias Recientes</h2>
+        <h2 class="text-2xl font-bold text-gray-900 mb-4 dark:text-white">Noticias Recientes</h2>
         <div class="space-y-4">
-            {% for noticia in noticias|slice:":2" %}  <article class="bg-white p-6 rounded-lg shadow-md flex items-center hover:shadow-lg transition-shadow">
+            {% for noticia in noticias|slice:":2" %}  
+            <article class="bg-white p-6 rounded-lg shadow-md flex items-center hover:shadow-lg transition-shadow dark:bg-gray-800" >
                 <img src="{{ noticia.imagen.url }}" alt="{{ noticia.nombre }}"
                     class="w-24 h-20 object-cover rounded mr-4">
                 <div class="flex-1">
                     <span
                         class="inline-block bg-purple-100 text-purple-800 text-xs font-semibold px-2 py-1 rounded mb-1">Local</span>
-                    <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ noticia.nombre }}</h3>
-                    <p class="text-gray-600 text-sm">{{ noticia.comentario|truncatechars:50 }}</p>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1 dark:text-white">{{ noticia.nombre }}</h3>
+                    <p class="text-gray-600 text-sm dark:text-white">{{ noticia.comentario|truncatechars:50 }}</p>
                     <div class="flex items-center justify-between mt-2">
-                        <span class="text-sm text-gray-500">
+                        <span class="text-sm dark:text-white">
                              {% if noticia.fecha_creacion %}{{ noticia.fecha_creacion|timesince }} ago{% else %}Recién subido{% endif %}
                         </span>
                         <button class="text-blue-600 hover:text-blue-800 text-sm">Leer más</button>

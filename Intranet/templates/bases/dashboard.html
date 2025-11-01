@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
     <script src="https://cdn.tiny.cloud/1/ejfjtrkl8wvp1zp0gmdayshiu4vttmo0aa48mpk83p6bw6dw/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
 
       {% if messages %}
         {% for message in messages %}
@@ -28,12 +28,12 @@
         {% endfor %}
         {% endif %}
 
-    <div class="dashboard-layout flex h-screen overflow-hidden" id="dashboardLayout">
+    <div class="dashboard-layout flex h-screen overflow-hidden " id="dashboardLayout">
         
         <aside class="sidebar fixed inset-y-0 left-0 transform -translate-x-full lg:translate-x-0 
                       lg:sticky lg:flex-shrink-0 w-64 bg-white border-r border-gray-200 
                       p-4 flex flex-col space-y-2 z-30 transition-all duration-300 ease-in-out 
-                      shadow-xl lg:shadow-none lg:w-16 lg:hover:w-64 lg:group-[.is-open]:w-64">
+                      shadow-xl lg:shadow-none lg:w-16 lg:hover:w-64 lg:group-[.is-open]:w-64  dark:bg-gray-800">
                  {% if perms.Intranet.view_imagenes %}
                <a href="{% url 'admi' %}" class="nav-item-base text-red-600 hover:bg-red-50 hover:text-red-700 mt-auto">
                 <div class="flex items-center space-x-3">
@@ -87,7 +87,7 @@
 
         <div class="flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
             
-            <header class="bg-white shadow-md sticky top-0 z-20 border-b border-gray-100">
+            <header class="bg-white shadow-md sticky top-0 z-20 border-b border-gray-100  dark:bg-gray-800">
                 <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
                     
                     <div class="flex items-center space-x-4">
@@ -100,7 +100,11 @@
                     </div>
                 
                     <div class="profile flex items-center space-x-4">
-                        <span class="text-sm font-medium text-gray-700 hidden sm:block">
+                        <button onclick="toggleDarkMode()">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline-block  dark:text-yellow-300"></i>
+                        </button>
+                        <span class="text-sm font-medium text-gray-700 hidden sm:block dark:text-white">
                             Hola, {{ request.user.first_name }} {{ request.user.last_name }}
                         </span>
                         <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-pace-primary shadow-lg 
@@ -128,7 +132,7 @@
     </div>
     <script src="{% static 'js/sidebar.js' %}"></script>
     
-
+     <script src="{% static 'js/theme.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

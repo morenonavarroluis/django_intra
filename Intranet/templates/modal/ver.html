@@ -1,0 +1,49 @@
+<div class="modal fade" id="vermas{{ user.id }}" tabindex="-1" aria-labelledby="vermasModalLabel{{ user.id }}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"> 
+    <div class="modal-content bg-white dark:bg-gray-800 dark:border dark:border-gray-700">
+      
+      <div class="modal-header bg-primary text-white border-b border-gray-200 dark:border-gray-700 dark:bg-blue-900 dark:text-blue-100"> 
+        <h5 class="modal-title" id="vermasModalLabel{{ user.id }}">
+          Detalles de Usuario: **{{ user.first_name }} {{ user.last_name }}**
+        </h5>
+        <button type="button" class="btn-close btn-close-white dark:btn-close-dark dark:text-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+     <div class="modal-body p-4 bg-white dark:bg-gray-800"> 
+        <dl class="row mb-0">
+
+            <div class="col-12 mb-3"> 
+                <dt class="col-sm-4 text-uppercase fw-bold text-muted dark:text-gray-400">Nombre</dt> 
+                <dd class="col-sm-8 text-break text-gray-800 dark:text-white">{{ user.first_name }} {{ user.last_name }}</dd>
+            </div>
+            <hr class="my-2 dark:border-gray-700"> 
+            
+            <div class="col-12 mb-3">
+                <dt class="col-sm-4 text-uppercase fw-bold text-muted dark:text-gray-400">Usuario</dt>
+                <dd class="col-sm-8 text-break text-gray-800 dark:text-white">{{ user.username }}</dd>
+            </div>
+            <hr class="my-2 dark:border-gray-700">
+
+            <div class="col-12 mb-3">
+                <dt class="col-sm-4 text-uppercase fw-bold text-muted dark:text-gray-400">Email</dt>
+                <dd class="col-sm-8 text-break text-gray-800 dark:text-white">{{ user.email }}</dd>
+            </div>
+
+            {% if user.groups.all.0.name %}
+                <hr class="my-2 dark:border-gray-700">
+                <div class="col-12">
+                    <dt class="col-sm-4 text-uppercase fw-bold text-primary dark:text-blue-400">Rol/Grupo</dt> 
+                    <dd class="col-sm-8 text-success fw-bolder fs-5 dark:text-green-400">{{ user.groups.all.0.name }}</dd> 
+                </div>
+            {% endif %}
+
+        </dl>
+    </div>
+        
+      <div class="modal-footer border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700">
+        <button type="button" class="btn btn-secondary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

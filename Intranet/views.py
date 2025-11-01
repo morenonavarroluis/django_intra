@@ -159,7 +159,50 @@ def registrar_rol(request):
         else:
             messages.error(request, "Método no permitido para registrar rol.")
             return redirect('usuario')
-       
+
+def eliminar_usuario(request, user_id):
+    if request.method == 'POST':
+        try:
+            user_to_delete = User.objects.get(id=user_id)
+            user_to_delete.delete()
+            messages.success(request, "Usuario eliminado con éxito.")
+            return redirect('usuario')
+        except User.DoesNotExist:
+            messages.error(request, "El usuario no existe.")
+            return redirect('usuario')
+        except Exception as e:
+            messages.error(request, f"Error al eliminar el usuario: {e}")
+            return redirect('usuario')
+    else:
+        messages.error(request, "Método no permitido para eliminar usuario.")
+        return redirect('usuario')
+
+def editar_usuario(request, user_id):
+    if request.method == 'POST':
+        try:
+            user_to_edit = User.objects.get(id=user_id)
+            user_to_edit.username =  request.POST.get('username', user_to_edit.username)
+            user_to_edit.first_name = request.POST.get('first_name', user_to_edit.first_name)
+            user_to_edit.last_name = request.POST.get('last_name', user_to_edit.last_name)
+            user_to_edit.email = request.POST.get('email', user_to_edit.email)
+            password = request.POST.get('password')
+            if password:
+                user_to_edit.set_password(password)
+            
+            user_to_edit.save()
+            messages.success(request, "Usuario actualizado con éxito.")
+            return redirect('usuario')
+        except User.DoesNotExist:
+            messages.error(request, "El usuario no existe.")
+            return redirect('usuario')
+        except Exception as e:
+            messages.error(request, f"Error al actualizar el usuario: {e}")
+            return redirect('usuario')
+    else:
+        messages.error(request, "Método no permitido para editar usuario.")
+        return redirect('usuario')
+
+
 def exit(request):
     if request.user.is_authenticated:
         logout(request)

@@ -11,5 +11,7 @@ urlpatterns = [
     path('solicitud_soport', solicitud_soport, name="solicitud_soport"),
     path('registrar_usuarios', registrar_usuarios, name='registrar_usuarios'),
     path('registrar_rol', registrar_rol, name='registrar_rol'),
+    path('eliminar_usuario/<int:user_id>/', eliminar_usuario, name='eliminar_usuario'),
+    path('editar_usuario/<int:user_id>/', editar_usuario, name='editar_usuario'),
     path('cerrar-sesion/', exit, name='cerrar_sesion')
 ]

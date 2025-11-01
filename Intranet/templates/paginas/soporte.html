@@ -1,20 +1,18 @@
 {% extends 'bases/dashboard.html' %}
-
 {% block content %}
-<div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8">
+<div class="min-h-screen bg-gray-50 p-4 sm:p-6 lg:p-8 dark:bg-gray-900">
   
-  <div class="flex flex-wrap gap-3 mb-8 border-b border-gray-200">
-    
-    <a 
+  <div class="flex flex-wrap gap-3 mb-8 border-b border-gray-200 dark:border-gray-700"> <a 
       href="#" 
-      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-150 shadow-sm"
+      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-150 shadow-sm 
+             dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700"
     >
       Historial
     </a>
     
     <a 
       href="#" 
-      class="px-4 py-2 text-sm font-bold text-white bg-blue-600 border border-blue-600 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-150"
+      class="px-4 py-2 text-sm font-bold text-white bg-blue-600 border border-blue-600 rounded-lg shadow-md focus:outline-none focus:ring-4 focus:ring-blue-300 transition duration-150 dark:focus:ring-blue-800"
       aria-current="page"
     >
       En Espera
@@ -22,76 +20,80 @@
     
     <a 
       href="#" 
-      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-150 shadow-sm"
+      class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-150 shadow-sm
+             dark:text-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700"
     >
       Activos
     </a>
   </div>
 
-  <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
+  <div class="bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
     
-    <div class="p-5 border-b border-gray-100">
-      <h3 class="text-xl font-semibold text-gray-800">Casos en Espera</h3>
-    </div>
+    <div class="p-5 border-b border-gray-100 dark:border-gray-700"> <h3 class="text-xl font-semibold text-gray-800 dark:text-white">Casos en Espera</h3> </div>
     
     <div class="p-5 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
       
       <div class="flex items-center space-x-2">
-        <label for="registros" class="text-gray-600 text-sm">Mostrar</label>
-        <select id="registros" class="border border-gray-300 rounded-lg p-2 text-sm focus:ring-blue-500 focus:border-blue-500">
-          <option>10</option>
+        <label for="registros" class="text-gray-600 text-sm dark:text-gray-300">Mostrar</label> <select 
+          id="registros" 
+          class="border border-gray-300 rounded-lg p-2 text-sm focus:ring-blue-500 focus:border-blue-500
+                 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300" 
+        > <option>10</option>
           <option>25</option>
           <option>50</option>
         </select>
-        <span class="text-gray-600 text-sm">registros por página</span>
-      </div>
+        <span class="text-gray-600 text-sm dark:text-gray-300">registros por página</span> </div>
       
       <div class="flex items-center space-x-2 w-full sm:w-auto">
-        <label for="buscar" class="text-gray-600 text-sm whitespace-nowrap">Buscar:</label>
-        <input 
+        <label for="buscar" class="text-gray-600 text-sm whitespace-nowrap dark:text-gray-300">Buscar:</label> <input 
           type="text" 
           id="buscar" 
           placeholder="Buscar casos..."
-          class="w-full sm:w-64 border border-gray-300 rounded-lg p-2 text-sm focus:ring-blue-500 focus:border-blue-500"
-        >
-      </div>
+          class="w-full sm:w-64 border border-gray-300 rounded-lg p-2 text-sm focus:ring-blue-500 focus:border-blue-500
+                 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:placeholder-gray-400"
+        > </div>
     </div>
 
     <div class="overflow-x-auto">
-      <table class="min-w-full divide-y divide-gray-200">
-        <thead class="bg-gray-50">
-          <tr>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition">
-              <div class="flex items-center">Descripción<svg class="ml-1 w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></div>
+      <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"> <thead class="bg-gray-50 dark:bg-gray-900"> <tr>
+            <th scope="col" 
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition 
+                     dark:text-gray-400 dark:hover:bg-gray-700"
+            >
+              <div class="flex items-center">Descripción<svg class="ml-1 w-3 h-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></div>
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition">
-              <div class="flex items-center">Nombre y Apellidos<svg class="ml-1 w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></div>
+            <th scope="col" 
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition
+                     dark:text-gray-400 dark:hover:bg-gray-700"
+            >
+              <div class="flex items-center">Nombre y Apellidos<svg class="ml-1 w-3 h-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></div>
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition">
-              <div class="flex items-center">Fecha de Creación<svg class="ml-1 w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></div>
+            <th scope="col" 
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100 transition
+                     dark:text-gray-400 dark:hover:bg-gray-700"
+            >
+              <div class="flex items-center">Fecha de Creación<svg class="ml-1 w-3 h-3 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path></svg></div>
             </th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Técnico</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nivel</th>
-            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Acción</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Técnico</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Status</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Nivel</th>
+            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider dark:text-gray-400">Acción</th>
           </tr>
         </thead>
-        <tbody class="bg-white divide-y divide-gray-200">
-          {% for caso in casos %}
-          <tr class="hover:bg-blue-50 transition duration-100">
-            <td class="px-6 py-4 max-w-xs truncate text-sm font-medium text-gray-900" title="sin internet en mi pc">
+        <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700"> {% for caso in casos %}
+          <tr class="hover:bg-blue-50 transition duration-100 dark:hover:bg-gray-700"> <td class="px-6 py-4 max-w-xs truncate text-sm font-medium text-gray-900 dark:text-white" title="sin internet en mi pc">
              {{ caso.descripcion }}
             </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ caso.reporter_user.get_full_name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ caso.CREATION_DATE }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Luis manuel</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ caso.reporter_user.get_full_name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ caso.CREATION_DATE }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Luis manuel</td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100">
                 {{ caso.STATUS.STATUS }}
               </span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+              <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100">
                 {{ caso.ID_LEVEL.LEVEL }}
               </span>
             </td>
@@ -106,16 +108,16 @@
       </table>
     </div>
 
-    <div class="p-5 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+    <div class="p-5 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0 dark:border-gray-700">
       
-      <span class="text-sm text-gray-600">
-        Mostrando <span class="font-semibold">página 1</span> de <span class="font-semibold">1</span>
+      <span class="text-sm text-gray-600 dark:text-gray-300"> Mostrando <span class="font-semibold">página 1</span> de <span class="font-semibold">1</span>
         <span class="hidden sm:inline-block"> (Total 3 registros)</span>
       </span>
 
       <nav class="relative z-0 inline-flex rounded-lg shadow-sm -space-x-px" aria-label="Pagination">
         <button 
-          class="relative inline-flex items-center px-3 py-2 rounded-l-lg border border-gray-300 bg-gray-100 text-sm font-medium text-gray-500 cursor-not-allowed"
+          class="relative inline-flex items-center px-3 py-2 rounded-l-lg border border-gray-300 bg-gray-100 text-sm font-medium text-gray-500 cursor-not-allowed
+                 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-400"
           disabled
         >
           Anterior
@@ -129,7 +131,8 @@
         </button>
         
         <button 
-          class="relative inline-flex items-center px-3 py-2 rounded-r-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+          class="relative inline-flex items-center px-3 py-2 rounded-r-lg border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 transition
+                 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-700"
         >
           Siguiente
         </button>

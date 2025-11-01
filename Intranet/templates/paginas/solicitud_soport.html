@@ -2,28 +2,29 @@
 
 {% block content %}
 
-<main class="flex-1 p-4 md:p-8 bg-gray-50 min-h-screen">
+<main class="flex-1 p-4 md:p-8 bg-gray-50 min-h-screen dark:bg-gray-900">
 
     <div class="mb-8 max-w-3xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-900 border-b-2 border-indigo-600 pb-2">
+        <h1 class="text-3xl font-bold text-gray-900 border-b-2 border-indigo-600 pb-2 dark:text-white">
             Solicitud de Soporte
         </h1>
-        <p class="text-gray-600 mt-2">
+        <p class="text-gray-600 mt-2 dark:text-gray-400">
             Completa el siguiente formulario para crear una nueva solicitud de soporte o reportar un problema.
         </p>
     </div>
 
-    <div class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl border border-gray-100">
+    <div class="max-w-3xl mx-auto bg-white p-6 md:p-10 rounded-xl shadow-2xl border border-gray-100 dark:bg-gray-800 dark:border-gray-700">
 
         <form action="solicitud_soport" method="post" class="space-y-6" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div>
-                <label for="tipo" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="tipo" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
                     Tipo de Solicitud:
                 </label>
                 <select name="area" id="tipo" required
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out bg-white">
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out bg-white
+                           dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300">
                    
                     <option value="" disabled selected>Selecciona una opción</option>
                     {% for a in consulta %}
@@ -33,20 +34,22 @@
             </div>
 
             <div>
-                <label for="asunto" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="asunto" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
                     Asunto:
                 </label>
                 <input type="text" id="asunto" name="asunto" required
-                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out"
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out
+                           dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                     placeholder="Ej: Error al iniciar sesión, Pregunta sobre el módulo X">
             </div>
 
             <div>
-                <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1">
+                <label for="descripcion" class="block text-sm font-medium text-gray-700 mb-1 dark:text-gray-300">
                     Descripción Detallada:
                 </label>
                 <textarea id="descripcion" name="descripcion" rows="6" required
-                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out resize-y"
+                    class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 ease-in-out resize-y
+                           dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400"
                     placeholder="Sé lo más específico posible. Incluye pasos para reproducir el error o mensajes exactos."></textarea>
             </div>
 
