@@ -1,0 +1,45 @@
+<div class="modal fade" id="Asignar" tabindex="-1" aria-labelledby="Asignar{{ caso.ID_REPORT}}" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered"> 
+    <div class="modal-content bg-white dark:bg-gray-800 dark:border dark:border-gray-700">
+      
+      <div class="modal-header bg-primary text-white border-b border-gray-200 dark:border-gray-700 dark:bg-blue-900 dark:text-blue-100"> 
+        <h5 class="modal-title" >
+            
+        </h5>
+        <button type="button" class="btn-close btn-close-white dark:btn-close-dark dark:text-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      
+     <div class="modal-body p-4 bg-white dark:bg-gray-800"> 
+        <div class="flex flex-col">
+                <label for="">Asignar tecnico</label>
+                <select name="" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
+                    <option value=""></option>
+                </select>
+
+                <label for="">Estatus</label>
+                <select name="" id="" class="bg-white dark:bg-gray-600 py-1 px-4>
+                    <option value="" >Seleccione una opcion</option>
+                    {% for statu in status %}
+                    <option value="" class="text-black dark:text-white">{{ statu.STATUS }}</option>
+                    
+                    {% endfor %}
+                </select>
+
+                <label for="">Nivel del Caso</label>
+                <select name="" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
+                    <option value="">seleccione una opcion</option>
+                    {% for lev in level %} 
+                    <option value="">{{ lev.LEVEL }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+        <div class="modal-footer border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700">
+        <button type="submit" class="btn btn-primary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200 flex justify-left">Asignar</button>
+        <button type="button" class="btn btn-secondary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+
+    </div>
+  </div>
+</div>

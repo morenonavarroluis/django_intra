@@ -105,8 +105,17 @@ def solicitud_soport(request):
 
 def soporte(request):
     casos = Report.objects.all()
-    
-    return render(request, "paginas/soporte.html",{'casos': casos})
+    status = Status.objects.all()
+    level = Level.objects.all()
+    tecnico = User.objects.all()
+    contexto = {
+        'casos': casos,
+        'status': status,
+        'level': level,
+        'tecnico': tecnico
+
+    }
+    return render(request, "paginas/soporte.html",contexto)
 
 def registrar_usuarios(request):
     if request.method == 'POST':

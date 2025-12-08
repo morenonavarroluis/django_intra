@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'panel.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'intra',
-        'USER': 'lnavarro',
+        'NAME': 'intranet',
+        'USER': 'root',
         'PASSWORD': '123456',
         'PORT': '3606'
     }
