@@ -1,0 +1,77 @@
+{% extends "report/base-pdf.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="text-primary">Recibo de Pago</h2>
+            <h4 class="text-secondary">N°: {{ pago.numero_recibo|default:"00001" }}</h4>
+        </div>
+    </div>
+    
+    <hr class="my-4"/>
+
+    <div class="row mb-4">
+        <div class="col-6">
+            <p class="font-weight-bold">Pagado a:</p>
+            <p>Nombre de la Empresa S.A.</p>
+            <p>Rif: J-12345678-0</p>
+            <p>Dirección: Calle Ficticia, N° 123</p>
+        </div>
+        <div class="col-6 text-right">
+            <p class="font-weight-bold">Fecha de Emisión:</p>
+            <p>{{ pago.fecha|date:"d/m/Y" }}</p>
+            <p class="font-weight-bold">Monto Total:</p>
+            <h3 class="text-success">${{ pago.monto_total|default:"0.00" }}</h3>
+        </div>
+    </div>
+
+    <hr class="my-4"/>
+
+    <h4 class="mb-3">Detalles del Pago</h4>
+    <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+            <tr>
+                <th style="width: 60%;">Concepto</th>
+                <th style="width: 20%;">Cantidad</th>
+                <th style="width: 20%;">Monto</th>
+            </tr>
+        </thead>
+        <tbody>
+            {# Itera sobre los conceptos de pago si tienes un contexto de Django #}
+            {% for item in pago.items %}
+            <tr>
+                <td>{{ item.descripcion }}</td>
+                <td class="text-right">{{ item.cantidad|default:"1" }}</td>
+                <td class="text-right">${{ item.monto|default:"0.00" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td>Servicio General o Producto Adquirido</td>
+                <td class="text-right">1</td>
+                <td class="text-right">${{ pago.monto_total|default:"0.00" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2" class="text-right font-weight-bold">SUBTOTAL:</td>
+                <td class="text-right">${{ pago.subtotal|default:"0.00" }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-right font-weight-bold">IMPUESTO (IVA 16%):</td>
+                <td class="text-right">${{ pago.iva|default:"0.00" }}</td>
+            </tr>
+            <tr class="bg-light">
+                <td colspan="2" class="text-right font-weight-bold">TOTAL PAGADO:</td>
+                <td class="text-right font-weight-bold">${{ pago.monto_total|default:"0.00" }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="mt-5">
+        <p class="font-weight-bold">Notas:</p>
+        <p class="small">Recibido por: _________________________</p>
+        <p class="small">Este documento es una constancia de pago y no es una factura fiscal.</p>
+    </div>
+
+{% endblock %}

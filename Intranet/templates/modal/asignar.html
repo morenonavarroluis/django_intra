@@ -1,50 +1,54 @@
 <div class="modal fade" id="Asignar{{ caso.ID_REPORT }}" tabindex="-1" aria-labelledby="Asignar{{ caso.ID_REPORT }}" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"> 
-    <div class="modal-content bg-white dark:bg-gray-800 dark:border dark:border-gray-700">
+  <div class="modal-dialog modal-dialog-centered **max-w-md w-full**"> <div class="modal-content **rounded-xl shadow-2xl** bg-white dark:bg-gray-800 dark:border dark:border-gray-700 **overflow-hidden**">
       
-      <div class="modal-header bg-primary text-white border-b border-gray-200 dark:border-gray-700 dark:bg-blue-900 dark:text-blue-100"> 
-        <h5 class="modal-title" >
-            
+      <div class="modal-header **px-6 py-4** bg-primary **text-lg font-semibold** text-white border-b border-gray-200 dark:border-gray-700 dark:bg-blue-600 dark:text-gray-100 **flex justify-between items-center**"> 
+        <h5 class="modal-title **text-lg font-semibold**">
+            Asignar y Actualizar Caso #{{ caso.ID_REPORT }} 
         </h5>
-        <button type="button" class="btn-close btn-close-white dark:btn-close-dark dark:text-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close **p-2 rounded-full hover:bg-white/10 transition** btn-close-white dark:btn-close-dark dark:text-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       
-     <div class="modal-body p-4 bg-white dark:bg-gray-800"> 
-        <div class="flex flex-col">
-          <form action="{% url 'reporte' caso.ID_REPORT %}" method="post">
-             {% csrf_token %}
-                <label for="">Asignar tecnico</label>
-                <select name="tecnico" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
+     <form action="{% url 'reporte' caso.ID_REPORT %}" method="post">
+       {% csrf_token %}
+       <div class="modal-body p-6 bg-white dark:bg-gray-800"> 
+          <div class="flex flex-col **space-y-4**"> <div class="flex flex-col">
+                <label for="id_tecnico" class="**mb-1 text-sm font-medium text-gray-700 dark:text-gray-300**">Asignar técnico</label>
+                <select name="tecnico" id="id_tecnico" class="**w-full rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500** bg-white dark:bg-gray-700 py-2 px-4 **text-gray-900 dark:text-gray-200**">
                     <input type="hidden" value="{{ ID_REPORT }}">
-                    <option value="">Seleccione una tecnico</option>
+                    <option value="" class="**text-gray-500 dark:text-gray-400**">Seleccione un técnico</option>
                    {% for tecnicos in tecnico %}
-                    <option value="{{ tecnicos.id }}" >{{ tecnicos.first_name }} {{ tecnicos.last_name }}</option>
+                    <option value="{{ tecnicos.id }}">{{ tecnicos.first_name }} {{ tecnicos.last_name }}</option>
                    {% endfor %}
                   </select>
+              </div>
 
-                <label for="">Estatus</label>
-                <select  name="status" class="bg-white dark:bg-gray-600 py-1 px-4">
-                    <option value="">Seleccione una opcion</option>
+              <div class="flex flex-col">
+                <label for="id_status" class="**mb-1 text-sm font-medium text-gray-700 dark:text-gray-300**">Estatus</label>
+                <select name="status" id="id_status" class="**w-full rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500** bg-white dark:bg-gray-700 py-2 px-4 **text-gray-900 dark:text-gray-200**">
+                    <option value="" class="**text-gray-500 dark:text-gray-400**">Seleccione una opción</option>
                     {% for statu in status %}
-                    <option value="{{ statu.ID_STATUS }}"  class="text-black dark:text-white">{{ statu.STATUS }}</option>
-                    
+                    <option value="{{ statu.ID_STATUS }}">{{ statu.STATUS }}</option>
                     {% endfor %}
                 </select>
+              </div>
 
-                <label for="">Nivel del Caso</label>
-                <select name="level" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
-                    <option value="">seleccione una opcion</option>
+              <div class="flex flex-col">
+                <label for="id_level" class="**mb-1 text-sm font-medium text-gray-700 dark:text-gray-300**">Nivel del Caso</label>
+                <select name="level" id="id_level" class="**w-full rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500** bg-white dark:bg-gray-700 py-2 px-4 **text-gray-900 dark:text-gray-200**">
+                    <option value="" class="**text-gray-500 dark:text-gray-400**">Seleccione una opción</option>
                     {% for lev in level %} 
-                    <option value="{{ lev.ID_LEVEL }}" >{{ lev.LEVEL }}</option>
+                    <option value="{{ lev.ID_LEVEL }}">{{ lev.LEVEL }}</option>
                     {% endfor %}
                 </select>
-            </div>
-        </div>
+              </div>
+          </div>
+       </div>
         
-        <div class="modal-footer border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700">
-        <button type="submit" class="btn btn-primary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200 flex justify-left">Asignar</button>
-        <button type="button" class="btn btn-secondary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200" data-bs-dismiss="modal">Cerrar</button>
-      </div>
+        <div class="modal-footer **p-4** border-t border-gray-200 dark:border-gray-700 **flex justify-end space-x-3** dark:bg-gray-800">
+          <button type="button" class="btn **py-2 px-4 rounded-lg font-medium** btn-secondary **text-gray-700 hover:bg-gray-100** dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200 **dark:hover:bg-gray-500**" data-bs-dismiss="modal">Cerrar</button>
+
+          <button type="submit" class="btn **py-2 px-4 rounded-lg font-medium** btn-primary **bg-blue-600 hover:bg-blue-700 text-white** dark:bg-blue-700 dark:border-blue-600 dark:text-white **dark:hover:bg-blue-800 transition**">Asignar</button>
+        </div>
        </form>
     </div>
   </div>

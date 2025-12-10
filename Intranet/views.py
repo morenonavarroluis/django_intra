@@ -1,10 +1,13 @@
-from django.http import HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User,Group,Permission
 from django.contrib import messages
 from .models import *
+from django.template.loader import render_to_string
 
+from weasyprint import HTML
+from weasyprint.text.fonts import FontConfiguration
 
 def inicio(request):
     return render(request, "paginas/login.html")
@@ -134,7 +137,6 @@ def asignar_report(request, ID_REPORT):
         messages.success(request,"asignacion exitosa")
     return redirect('soporte')
         
-
 def registrar_usuarios(request):
     if request.method == 'POST':
         first_name = request.POST.get('nombre')
@@ -230,6 +232,51 @@ def editar_usuario(request, user_id):
         return redirect('usuario')
 
 
+def export_pdf(request):
+
+    context = {}
+    html = render_to_string("report/report-pdf.html", context)
+
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = "inline; report.pdf"
+
+    font_config = FontConfiguration()
+    HTML(string=html).write_pdf(response, font_config=font_config)
+
+    return response
+
+def export_receipt_pdf(request, recibo_id=None):
+    # Simulación de datos que obtendrías de la base de datos
+    # Si recibo_id es None, usa datos de ejemplo
+    
+    # 1. Prepara el contexto (datos del recibo)
+    context = {
+        'pago': {
+            'numero_recibo': recibo_id if recibo_id else 54321,
+            'fecha': '2025-12-10',
+            'subtotal': 90.00,
+            'iva': 14.40,
+            'monto_total': 104.40,
+            'items': [
+                {'descripcion': 'Honorarios por Consultoría (Octubre)', 'cantidad': 1, 'monto': 50.00},
+                {'descripcion': 'Licencia de Software Anual', 'cantidad': 1, 'monto': 40.00},
+            ]
+        }
+    }
+
+    # 2. Renderiza la plantilla HTML
+    # **¡IMPORTANTE!** Cambia la plantilla a "report/receipt-pdf.html"
+    html = render_to_string("report/receipt-pdf.html", context) 
+
+    # 3. Configura la respuesta HTTP para PDF
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = "inline; filename='recibo_{}.pdf'".format(context['pago']['numero_recibo'])
+
+    # 4. Genera el PDF con WeasyPrint
+    font_config = FontConfiguration()
+    HTML(string=html).write_pdf(response, font_config=font_config)
+    
+    return response
 def exit(request):
     if request.user.is_authenticated:
         logout(request)

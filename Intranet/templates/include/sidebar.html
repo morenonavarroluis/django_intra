@@ -35,6 +35,18 @@
                     <span class="nav-text">soporte</span>
                 </div>
             </a>
+            <a href="{% url 'export-pdf' %}" target="_blank" class="nav-item-base dark:text-white hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-solid fa-paperclip"></i>
+                    <span class="nav-text">Constancia de trabajo</span>
+                </div>
+            </a>
+            <a href="{% url 'export-receipt-pdf' %}" target="_blank" class="nav-item-base dark:text-white hover:text-red-700 mt-auto">
+                <div class="flex items-center space-x-3">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span class="nav-text">Recibo de pago</span>
+                </div>
+            </a>
            
            <div class="text-2xl font-extrabold text-pace-primary pt-1 pb-4 border-b border-gray-100 
                         truncate lg:opacity-0 lg:group-hover:opacity-100 lg:group-[.is-open]:opacity-100 
