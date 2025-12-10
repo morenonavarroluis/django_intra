@@ -1,4 +1,4 @@
-<div class="modal fade" id="Asignar" tabindex="-1" aria-labelledby="Asignar{{ caso.ID_REPORT}}" aria-hidden="true">
+<div class="modal fade" id="Asignar{{ caso.ID_REPORT }}" tabindex="-1" aria-labelledby="Asignar{{ caso.ID_REPORT }}" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered"> 
     <div class="modal-content bg-white dark:bg-gray-800 dark:border dark:border-gray-700">
       
@@ -11,25 +11,31 @@
       
      <div class="modal-body p-4 bg-white dark:bg-gray-800"> 
         <div class="flex flex-col">
+          <form action="{% url 'reporte' caso.ID_REPORT %}" method="post">
+             {% csrf_token %}
                 <label for="">Asignar tecnico</label>
-                <select name="" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
-                    <option value=""></option>
-                </select>
+                <select name="tecnico" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
+                    <input type="hidden" value="{{ ID_REPORT }}">
+                    <option value="">Seleccione una tecnico</option>
+                   {% for tecnicos in tecnico %}
+                    <option value="{{ tecnicos.id }}" >{{ tecnicos.first_name }} {{ tecnicos.last_name }}</option>
+                   {% endfor %}
+                  </select>
 
                 <label for="">Estatus</label>
-                <select name="" id="" class="bg-white dark:bg-gray-600 py-1 px-4>
-                    <option value="" >Seleccione una opcion</option>
+                <select  name="status" class="bg-white dark:bg-gray-600 py-1 px-4">
+                    <option value="">Seleccione una opcion</option>
                     {% for statu in status %}
-                    <option value="" class="text-black dark:text-white">{{ statu.STATUS }}</option>
+                    <option value="{{ statu.ID_STATUS }}"  class="text-black dark:text-white">{{ statu.STATUS }}</option>
                     
                     {% endfor %}
                 </select>
 
                 <label for="">Nivel del Caso</label>
-                <select name="" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
+                <select name="level" id="" class="bg-white dark:bg-gray-600 py-1 px-4">
                     <option value="">seleccione una opcion</option>
                     {% for lev in level %} 
-                    <option value="">{{ lev.LEVEL }}</option>
+                    <option value="{{ lev.ID_LEVEL }}" >{{ lev.LEVEL }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -39,7 +45,7 @@
         <button type="submit" class="btn btn-primary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200 flex justify-left">Asignar</button>
         <button type="button" class="btn btn-secondary dark:bg-gray-600 dark:border-gray-500 dark:text-gray-200" data-bs-dismiss="modal">Cerrar</button>
       </div>
-
+       </form>
     </div>
   </div>
 </div>

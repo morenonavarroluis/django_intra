@@ -1,5 +1,5 @@
 from django.http import HttpResponseForbidden
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User,Group,Permission
 from django.contrib import messages
@@ -116,6 +116,24 @@ def soporte(request):
 
     }
     return render(request, "paginas/soporte.html",contexto)
+
+def asignar_report(request, ID_REPORT):
+    reporte = get_object_or_404(Report, pk=ID_REPORT)
+    if request.method == 'POST':
+        # Capturar los IDs (que ahora no serán None)
+        tecnico_id = request.POST.get('tecnico')
+        status_id = request.POST.get('status')
+        level_id = request.POST.get('level')
+      
+      
+        reporte.ID_LEVEL_id = level_id     
+        reporte.STATUS_id = status_id 
+        reporte.technician_user_id = tecnico_id 
+
+        reporte.save()
+        messages.success(request,"asignacion exitosa")
+    return redirect('soporte')
+        
 
 def registrar_usuarios(request):
     if request.method == 'POST':

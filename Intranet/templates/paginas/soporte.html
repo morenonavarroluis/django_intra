@@ -88,7 +88,7 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ caso.reporter_user.get_full_name }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ caso.CREATION_DATE }}</td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Luis manuel</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{{ caso.technician_user.get_full_name }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100">
                 {{ caso.STATUS.STATUS }}
@@ -101,11 +101,12 @@
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
               <button  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-4 rounded-lg shadow-md transition duration-150" data-bs-toggle="modal"
-      data-bs-target="#Asignar">
+      data-bs-target="#Asignar{{ caso.ID_REPORT }}">
                 Asignar
               </button>
             </td>
           </tr>
+          {% include 'modal/asignar.html'%}
           {% endfor %}
         </tbody>
       </table>
@@ -144,5 +145,5 @@
     </div>
   </div>
 </div>
-{% include 'modal/asignar.html'%}
+
 {% endblock content %}

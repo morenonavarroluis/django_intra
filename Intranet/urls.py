@@ -8,6 +8,7 @@ urlpatterns = [
     path('usuario', usuario, name="usuario"),
     path('add_noticia', add_noticia, name="add_noticia"),
     path('soporte', soporte, name="soporte"),
+    path('reporte/<int:ID_REPORT>/', asignar_report, name="reporte"),
     path('solicitud_soport', solicitud_soport, name="solicitud_soport"),
     path('registrar_usuarios', registrar_usuarios, name='registrar_usuarios'),
     path('registrar_rol', registrar_rol, name='registrar_rol'),

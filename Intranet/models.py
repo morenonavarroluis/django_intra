@@ -28,7 +28,6 @@ class Status(models.Model):
 
     class Meta:
         verbose_name = "Estado"
-        # ✅ CORREGIDO
         verbose_name_plural = "Estados" 
 
     def __str__(self):
@@ -36,7 +35,6 @@ class Status(models.Model):
 
 
 class Level(models.Model):
-    """Corresponde a la tabla 'intranet level' (Prioridad)."""
     ID_LEVEL = models.AutoField(primary_key=True)
     LEVEL = models.CharField(max_length=20, verbose_name="Nivel/Prioridad")
 
