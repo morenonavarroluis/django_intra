@@ -7,6 +7,7 @@ urlpatterns = [
     path('admi', admi , name="admi"),
     path('usuario', usuario, name="usuario"),
     path('add_noticia', add_noticia, name="add_noticia"),
+    path('perfil', perfil , name="perfil"),
     path('soporte', soporte, name="soporte"),
     path('reporte/<int:ID_REPORT>/', asignar_report, name="reporte"),
     path('export/',export_pdf, name="export-pdf" ),

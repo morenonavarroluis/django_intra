@@ -277,6 +277,10 @@ def export_receipt_pdf(request, recibo_id=None):
     HTML(string=html).write_pdf(response, font_config=font_config)
     
     return response
+
+def perfil(request):
+    return render(request, "paginas/perfil.html")
+
 def exit(request):
     if request.user.is_authenticated:
         logout(request)
