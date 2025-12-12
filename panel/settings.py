@@ -74,24 +74,24 @@ WSGI_APPLICATION = 'panel.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'intra',
-#         'USER': 'lnavarro',
-#         'PASSWORD': '123456',
-#         'PORT': '3606'
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'intranet',
-        'USER': 'root',
+        'NAME': 'intra',
+        'USER': 'lnavarro',
         'PASSWORD': '123456',
         'PORT': '3606'
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'intranet',
+#         'USER': 'root',
+#         'PASSWORD': '123456',
+#         'PORT': '3606'
+#     }
+# }
 
 
 # Password validation
